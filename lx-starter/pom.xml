@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.lx</groupId>
+        <artifactId>lx-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>../lx-parent</relativePath>
+    </parent>
+    <artifactId>lx-starter</artifactId>
+    <packaging>pom</packaging>
+    <name>lx-starter</name>
+    <description>this is starter parent</description>
+
+    <properties>
+        <main.basedir>${basedir}/..</main.basedir>
+    </properties>
+
+
+    <modules>
+        <module> lx-framework-jdbc-starter</module>
+		<module>lx-framework-springmvc-starter</module>
+		<module>lx-framework-mybatis-starter</module>
+		<module>lx-framework-okhttp-starter</module>
+		<module>lx-framework-redis-starter</module>
+		<module>lx-framework-cloud-starter</module>
+    </modules>
+
+</project>

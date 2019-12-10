@@ -1,0 +1,37 @@
+
+
+log4jdbc:
+  sqltiming:
+    warn:
+      threshold: 300
+    error:
+      threshold: 2000
+  dump.sql.select: false
+
+logging.level.jdbc:
+  sqlonly: OFF
+  sqltiming: INFO
+  audit: OFF
+  resultset: OFF
+  resultsettable: OFF
+  connection: OFF
+
+spring:
+  datasource:
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+lx:
+  dataSource:
+    first:
+      username: root
+      password: 123456
+      jdbcUrl: jdbc:mysql://127.0.0.1:3306/test1?serverTimezone=UTC
+      jdbcPool:
+        maximumPoolSize: 30
+        driverClassName: com.mysql.jdbc.Driver
+  web:
+    springmvc:
+      cors:
+        allow-headers: '*'
+server:
+  port: 8081

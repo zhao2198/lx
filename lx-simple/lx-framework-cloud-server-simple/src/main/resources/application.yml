@@ -1,0 +1,16 @@
+server.port: 8761
+
+spring:
+  application:
+    name: cloud-server-sample
+
+eureka:
+  instance:
+    hostname: register
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+  server:
+    eviction-interval-timer-in-ms: 5000

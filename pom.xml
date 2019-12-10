@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.lx</groupId>
+	<artifactId>lx-build</artifactId>
+	<packaging>pom</packaging>
+	<version>${revision}</version>
+	<name>lx-build</name>
+	<description>Demo project for Spring Boot</description>
+	<url>http://lx.github.com</url>
+
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>deoveloper01</id>
+			<name>zhaowei</name>
+			<email>zw11059@163.com</email>
+			<url>http://lx.github.com</url>
+		</developer>
+	</developers>
+
+
+	<properties>
+		<main.basedir>${basedir}</main.basedir>
+		<revision>2.0.0-SNAPSHOT</revision>
+		<java.version>1.8</java.version>
+	</properties>
+
+
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>lx-autoconfigure</module>
+				<module>lx-dependencies</module>
+				<module>lx-starter</module>
+				<module>lx-parent</module>
+				<module>lx-simple</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>release</id>
+			<modules>
+				<module>lx-autoconfigure</module>
+				<module>lx-dependencies</module>
+				<module>lx-starter</module>
+				<module>lx-parent</module>
+				<module>lx-simple</module>
+			</modules>
+			<build>
+				<plugins>
+					<!--主要用于把整个项目进行deploy到中央仓库-->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>oss</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>oss</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+</project>

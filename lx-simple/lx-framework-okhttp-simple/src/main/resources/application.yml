@@ -1,0 +1,19 @@
+
+lx:
+  okhttp:
+    connectTimeout: 4000
+    readTimeout: 30000
+    writeTimeout: 30000
+    retryOnConnectionFailure: true
+    followRedirects: true
+    followSslRedirects: true
+    connection:
+      maxIdleConnections: 10
+      keepAliveDuration: 30000
+    level: BODY # 记录请求日志级别
+  web:
+    springmvc:
+      cors:
+        allow-headers: '*'
+server:
+  port: 8081
