@@ -8,10 +8,10 @@
         <version>${revision}</version>
         <relativePath>../lx-parent</relativePath>
     </parent>
-    <artifactId>lx-framework-simple</artifactId>
+    <artifactId>lx-framework-sample</artifactId>
     <packaging>pom</packaging>
-    <name>lx-framework-simple</name>
-    <description>this is all simple</description>
+    <name>lx-framework-sample</name>
+    <description>this is all sample</description>
 
     <properties>
         <main.basedir>${basedir}/..</main.basedir>
@@ -19,12 +19,12 @@
 
 
     <modules>
-        <module> lx-framework-jdbc-simple</module>
-		<module>lx-framework-mybatis-simple</module>
-		<module>lx-framework-okhttp-simple</module>
-        <module>lx-framework-redis-simple</module>
-		<module>lx-framework-cloud-client-simple</module>
-		<module>lx-framework-cloud-server-simple</module>
+        <module> lx-framework-jdbc-sample</module>
+		<module>lx-framework-mybatis-sample</module>
+		<module>lx-framework-okhttp-sample</module>
+        <module>lx-framework-redis-sample</module>
+		<module>lx-framework-cloud-client-sample</module>
+		<module>lx-framework-cloud-server-sample</module>
     </modules>
 
 </project>

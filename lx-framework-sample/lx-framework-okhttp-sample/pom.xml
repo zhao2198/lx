@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lx</groupId>
-        <artifactId>lx-framework-simple</artifactId>
+        <artifactId>lx-framework-sample</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>lx-framework-okhttp-simple</artifactId>
+    <artifactId>lx-framework-okhttp-sample</artifactId>
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
