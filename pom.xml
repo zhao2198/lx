@@ -8,7 +8,7 @@
 	<version>${revision}</version>
 	<name>lx-build</name>
 	<description>Demo project for Spring Boot</description>
-	<url>http://lx.github.com</url>
+	<url>https://github.com/zhao2198/lx</url>
 
 
 	<licenses>
