@@ -1,0 +1,16 @@
+
+lx:
+  web:
+    springmvc:
+      cors:
+        allow-headers: '*'
+  rabbitmq:
+    host: 192.168.119.19
+    port: 5672
+    user-name: guest
+    password: guest
+    vhost: /
+    confirm: true
+
+server:
+  port: 8081
