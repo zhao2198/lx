@@ -24,6 +24,14 @@
         <commons-io.version>2.6</commons-io.version>
         <reflections.version>0.9.11</reflections.version>
         <guava.version>20.0</guava.version>
+        <commons.configuration.version>1.10</commons.configuration.version>
+        <commons-lang3.version>3.1</commons-lang3.version>
+        <common-collections4.version>4.0</common-collections4.version>
+        <guava.version>15.0</guava.version>
+        <commons-beanutils.version>1.9.0</commons-beanutils.version>
+        <commons-codec.version>1.8</commons-codec.version>
+        <commons.io.version>2.5</commons.io.version>
+        <dozer.version>5.4.0</dozer.version>
 
     </properties>
 
@@ -47,6 +55,56 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${dozer.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- tools -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${common-collections4.version}</version>
+            </dependency>
+            <!--
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+             -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

@@ -47,6 +47,7 @@
 				<module>lx-starter</module>
 				<module>lx-parent</module>
 				<module>lx-framework-sample</module>
+				<module>lx-enterprise</module>
 			</modules>
 		</profile>
 		<profile>
@@ -56,6 +57,7 @@
 				<module>lx-dependencies</module>
 				<module>lx-starter</module>
 				<module>lx-parent</module>
+				<module>lx-enterprise</module>
 				<module>lx-framework-sample</module>
 			</modules>
 			<build>

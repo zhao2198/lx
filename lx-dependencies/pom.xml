@@ -114,6 +114,14 @@
                 <version>${revision}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.lx</groupId>
+                <artifactId>lx-framework-rabbitmq-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
+
 
             <!--swagger-->
             <dependency>

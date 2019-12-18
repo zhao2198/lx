@@ -25,6 +25,7 @@
 		<module>lx-framework-okhttp-starter</module>
 		<module>lx-framework-redis-starter</module>
 		<module>lx-framework-cloud-starter</module>
+		<module>lx-framework-rabbitmq-starter</module>
     </modules>
 
 </project>

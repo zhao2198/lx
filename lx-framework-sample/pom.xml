@@ -25,6 +25,7 @@
         <module>lx-framework-redis-sample</module>
 		<module>lx-framework-cloud-client-sample</module>
 		<module>lx-framework-cloud-server-sample</module>
+		<module>lx-framework-rabbitmq-sample</module>
     </modules>
 
 </project>
