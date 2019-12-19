@@ -19,13 +19,14 @@
 
 
     <modules>
-        <module> lx-framework-jdbc-sample</module>
-		<module>lx-framework-mybatis-sample</module>
-		<module>lx-framework-okhttp-sample</module>
+        <module>lx-framework-jdbc-sample</module>
+        <module>lx-framework-mybatis-sample</module>
+        <module>lx-framework-okhttp-sample</module>
         <module>lx-framework-redis-sample</module>
-		<module>lx-framework-cloud-client-sample</module>
-		<module>lx-framework-cloud-server-sample</module>
-		<module>lx-framework-rabbitmq-sample</module>
+        <module>lx-framework-cloud-client-sample</module>
+        <module>lx-framework-cloud-server-sample</module>
+        <module>lx-framework-rabbitmq-sample</module>
+        <module>lx-framework-elasticsearch-sample</module>
     </modules>
 
 </project>

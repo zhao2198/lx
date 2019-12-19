@@ -1,0 +1,18 @@
+
+lx:
+  web:
+    springmvc:
+      cors:
+        allow-headers: '*'
+server:
+  port: 8081
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.119.19:9300
+      cluster-name: docker-cluster
+      repositories:
+        enabled: true
+  elasticsearch:
+    rest:
+      uris: http://192.168.119.19:9200
