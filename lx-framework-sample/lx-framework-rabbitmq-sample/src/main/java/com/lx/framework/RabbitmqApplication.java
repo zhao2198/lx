@@ -20,7 +20,7 @@ import java.util.Optional;
 public class RabbitmqApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(ElasticsearchApplication.class, args);
+    SpringApplication.run(RabbitmqApplication.class, args);
   }
 
 
