@@ -1,8 +1,8 @@
 package com.lx.core.common.web.controller;
 
 
+import com.lx.common.entity.AbstractEntity;
 import com.lx.common.util.JsonUtil;
-import com.lx.core.common.entity.AbstractEntity;
 import com.lx.core.common.utils.RestResultUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;

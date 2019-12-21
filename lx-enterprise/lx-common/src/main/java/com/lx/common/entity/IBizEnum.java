@@ -1,4 +1,4 @@
-package com.lx.core.common.entity;
+package com.lx.common.entity;
 
 
 public interface IBizEnum {

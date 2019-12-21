@@ -15,13 +15,20 @@
 
     <properties>
         <main.basedir>${basedir}/..</main.basedir>
+        <profile.active>local</profile.active>
     </properties>
+
+
 
 
     <modules>
         <module>lx-common</module>
         <module>lx-entity</module>
+        <module>lx-sdk</module>
         <module>lx-core</module>
+		<module>lx-ngt</module>
+		<module>lx-user</module>
+        <module>lx-code-generator</module>
     </modules>
 
     <dependencyManagement>
@@ -41,6 +48,12 @@
             <dependency>
                 <groupId>com.lx</groupId>
                 <artifactId>lx-entity</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lx</groupId>
+                <artifactId>lx-sdk</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

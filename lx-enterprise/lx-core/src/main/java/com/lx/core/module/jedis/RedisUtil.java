@@ -1,6 +1,8 @@
 package com.lx.core.module.jedis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 
 @Component
+@ConditionalOnBean(RedisConnectionFactory.class)
 public class RedisUtil {
 	@SuppressWarnings("rawtypes")
 	@Autowired

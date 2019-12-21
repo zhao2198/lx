@@ -1,0 +1,83 @@
+server:
+  port: 8000
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 30
+  servlet:
+    context-path: /ngt
+spring:
+  activemq:
+    broker-url: tcp://172.19.255.102:61616
+    user: admin
+    password: admin
+  thymeleaf:
+    cache: false
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+   #redis配置
+  redis:
+    database: 0
+    host: 172.19.255.102
+    password: ngt1202
+    jedis:
+      pool:
+        max-idle: 50
+    lettuce:
+      pool:
+        max-active: 100
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.19.255.102:3306/ngt?characterEncoding=utf8
+    username: root
+    password: ngt1202
+    jdbcPool:
+      maximumPoolSize: 200
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      minimumIdle: 100
+      initializationFailTimeout: 1
+      validationTimeout: 5000
+      leakDetectionThreshold: 0
+logging:
+  config: classpath:logback-spring.xml
+  file: /data0/log/ngt/ngt.log
+huaxing:
+  swagger: false
+  file: 
+    upload: /var/www/file/upload/
+    domain: http://file.380ui.com/upload
+  datasource:
+    names: ds1,ds2
+    ds1: 
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://172.19.255.102:3306/ngt?characterEncoding=utf8
+      username: root
+      password: ngt1202
+    jdbcPool:
+      maximumPoolSize: 5
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      minimumIdle: 2
+      initializationFailTimeout: 1
+      validationTimeout: 5000
+      leakDetectionThreshold: 0
+    ds2: 
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://172.19.255.102:3306/ngt?characterEncoding=utf8
+      username: root
+      password: ngt1202
+    jdbcPool:
+      maximumPoolSize: 5
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      minimumIdle: 2
+      initializationFailTimeout: 1
+      validationTimeout: 5000
+      leakDetectionThreshold: 0

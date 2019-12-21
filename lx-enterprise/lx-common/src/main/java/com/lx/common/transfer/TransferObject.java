@@ -1,9 +1,9 @@
 
-package com.lx.core.common.web.transfer;
+package com.lx.common.transfer;
 
 
+import com.lx.common.entity.AbstractEntity;
 import com.lx.common.util.ReflectUtils;
-import com.lx.core.common.entity.AbstractEntity;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -30,5 +30,9 @@ public class TransferObject<T extends AbstractEntity> implements Serializable {
 		}
 		return entity;
 	};
+
+	public void convert(T obj) {
+		BeanUtils.copyProperties(obj, this);
+	}
 
 }
