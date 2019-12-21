@@ -7,7 +7,7 @@ spring:
     cache-names:
     - redis-demo-1
   redis:
-    host: 127.0.0.1
+    host: 192.168.119.19
     port: 6379
     timeout: 2s   #操作超时的情况，默认60s
 #    cluster.nodes:

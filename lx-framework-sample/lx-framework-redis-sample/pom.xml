@@ -20,6 +20,11 @@
             <groupId>com.lx</groupId>
             <artifactId>lx-autoconfigure</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.lx</groupId>
+            <artifactId>com.lx.core</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.lx</groupId>
             <artifactId>lx-framework-springmvc-starter</artifactId>

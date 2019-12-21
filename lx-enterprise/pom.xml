@@ -31,6 +31,18 @@
                 <artifactId>lx-common</artifactId>
                 <version>${revision}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.lx</groupId>
+                <artifactId>lx-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lx</groupId>
+                <artifactId>lx-entity</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

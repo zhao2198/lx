@@ -1,6 +1,8 @@
 package com.lx.framework;
 
 
+import com.google.common.collect.Lists;
+import com.lx.framework.bean.Item;
 import com.lx.framework.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -33,6 +37,7 @@ public class RedisApplication {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
 
     @Autowired
     private RedisService redisService;
@@ -84,6 +89,14 @@ public class RedisApplication {
       RedisService.RedisDemoInfo redisDemoInfo = redisService.getDemoInfoLocKey("loc", 30);
       log.info("redis demo info is {}", redisDemoInfo);
       return Problem.builder().with("data", redisDemoInfo).build();
+    }
+
+    @PostMapping("/insert")
+    public void insert(){
+      List<Item> list = Lists.newArrayList();
+      list.add( new Item(1001l,"test1",new Date()));
+      list.add( new Item(1002l,"test2",new Date()));
+
     }
   }
 
