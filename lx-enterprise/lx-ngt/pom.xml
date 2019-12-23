@@ -11,31 +11,19 @@
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
+        <profile.active>local</profile.active>
     </properties>
 
-
     <dependencies>
-
 
         <dependency>
             <groupId>com.lx</groupId>
             <artifactId>lx-core</artifactId>
         </dependency>
 
-		<dependency>
-            <groupId>com.lx</groupId>
-            <artifactId>lx-entity</artifactId>
-        </dependency>
-
-
         <dependency>
             <groupId>com.lx</groupId>
             <artifactId>lx-sdk</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.lx</groupId>
-            <artifactId>lx-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
@@ -62,8 +50,8 @@
     </dependencies>
 
     <build>
-    <finalName>ngt</finalName>
-    <defaultGoal>package</defaultGoal>
+        <finalName>ngt</finalName>
+        <defaultGoal>package</defaultGoal>
     </build>
 
 

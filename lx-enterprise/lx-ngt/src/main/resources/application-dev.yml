@@ -1,103 +1,27 @@
 server:
-  port: 8000
+  port: 8002
   tomcat:
     max-threads: 1000
     min-spare-threads: 30
   servlet:
     context-path: /
-spring:
-  activemq:
-    broker-url: tcp://192.168.0.167:61616
-    user: admin
-    password: admin
-  thymeleaf:
-    cache: false
-  jackson:
-    time-zone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss
-   #redis配置
-  redis:
-    database: 0
-    host: 192.168.118.81
-    port: 6379
-    password: 
-    jedis:
-      pool:
-        max-idle: 8
-    lettuce:
-      pool:
-        max-active: 8
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.118.81:3306/ngt?characterEncoding=utf8
-    username: root
-    password:
-    jdbcPool:
-      maximumPoolSize: 30
-      connectionTimeout: 30000
-      idleTimeout: 600000
-      maxLifetime: 1800000
-      minimumIdle: 100
-      initializationFailTimeout: 1
-      validationTimeout: 5000
-      leakDetectionThreshold: 0
-logging:
-  config: classpath:logback-spring.xml
-  file: D:/logs/springboot.log
-eureka:
-  client:
-    healthcheck:
-      enabled: true
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    lease-renewal-interval-in-seconds: 5
-    lease-expiration-duration-in-seconds: 10
-    health-check-url-path: /actuator/health
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: ALWAYS
-huaxing:
-  file: 
-    upload: e:/file/upload
-    domain: http://file.huaxing.com/upload
-  datasource:
-    names: ds1,ds2
-    ds1: 
-      type: com.zaxxer.hikari.HikariDataSource
-      driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.118.81:3306/ngt?characterEncoding=utf8
+lx:
+  dataSource:
+    write:
       username: root
-      password:
+      password: 123456
+      jdbcUrl: jdbc:mysql://127.0.0.1:3306/ngt?serverTimezone=UTC
       jdbcPool:
         maximumPoolSize: 30
-        connectionTimeout: 30000
-        idleTimeout: 600000
-        maxLifetime: 1800000
-        minimumIdle: 100
-        initializationFailTimeout: 1
-        validationTimeout: 5000
-        leakDetectionThreshold: 0
-    ds2: 
-      type: com.zaxxer.hikari.HikariDataSource
-      driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.118.81:3306/ngt?characterEncoding=utf8
-      username: root
-      password:
-      jdbcPool:
-        maximumPoolSize: 30
-        connectionTimeout: 30000
-        idleTimeout: 600000
-        maxLifetime: 1800000
-        minimumIdle: 100
-        initializationFailTimeout: 1
-        validationTimeout: 5000
-        leakDetectionThreshold: 0
+        driverClassName: com.mysql.jdbc.Driver
+      configLocation: classpath:mybatis/mybatis-config.xml
+      basePackage: com.lx.*.mapper
+      typeAliasesPackage: com.lx.*.entity
+      mapperLocations: classpath:mybatis/mappers/*/*Mapper.xml
+  pagehelper:
+    pageSizeZero: true
+  swagger: true
+  web:
+    springmvc:
+      cors:
+        allow-headers: '*'

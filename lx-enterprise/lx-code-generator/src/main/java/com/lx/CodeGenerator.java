@@ -27,10 +27,10 @@ public class CodeGenerator {
      * Type blow 3 filed that what you want.
      * Generate code in <build> dir.
      */
-    private static String moduleName = "user";
-    private static String prefix = "sys_";
+    private static String moduleName = "test";
+    private static String prefix = "tb_";
     private static String[] includeTables = new String[]{
-            "sys_user","sys_role","sys_user_role","sys_menu","sys_role_menu"
+            "tb_book"
     };
     /**
      * -----------------------------------------Don't Edit-----------------------------------------
@@ -48,7 +48,7 @@ public class CodeGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/shiro_boot?serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/ngt?serverTimezone=UTC");
         mpg.setDataSource(dsc);
     }
 

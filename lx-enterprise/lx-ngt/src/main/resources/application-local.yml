@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8002
   tomcat:
     max-threads: 1000
     min-spare-threads: 30
@@ -10,19 +10,18 @@ lx:
     write:
       username: root
       password: 123456
-      jdbcUrl: jdbc:mysql://127.0.0.1:3306/test1?serverTimezone=UTC
+      jdbcUrl: jdbc:mysql://127.0.0.1:3306/ngt?serverTimezone=UTC
       jdbcPool:
         maximumPoolSize: 30
         driverClassName: com.mysql.jdbc.Driver
       configLocation: classpath:mybatis/mybatis-config.xml
-      basePackage: com.lx.mapper
-      typeAliasesPackage: com.lx.bean
-      mapperLocations: classpath:mybatis/*.xml
+      basePackage: com.lx.*.mapper
+      typeAliasesPackage: com.lx.*.entity
+      mapperLocations: classpath:mybatis/mappers/*/*Mapper.xml
   pagehelper:
     pageSizeZero: true
+  swagger: true
   web:
     springmvc:
       cors:
         allow-headers: '*'
-
-
