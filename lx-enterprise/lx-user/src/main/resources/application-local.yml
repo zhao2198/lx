@@ -20,6 +20,7 @@ lx:
       mapperLocations: classpath:mybatis/mappers/*/*Mapper.xml
   pagehelper:
     pageSizeZero: true
+  swagger: true
   web:
     springmvc:
       cors:

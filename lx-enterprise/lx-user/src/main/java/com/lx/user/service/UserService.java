@@ -4,6 +4,8 @@ import com.lx.core.module.service.mybatis.BaseService;
 import com.lx.user.entity.User;
 import com.lx.user.vo.UserVO;
 
+import java.util.List;
+
 /**
  * <p>
  * 系统用户 服务类
@@ -21,6 +23,9 @@ public interface UserService extends BaseService<User> {
      * @return
      */
     UserVO getUserById(Long id);
+
+
+    List<UserVO> getUserList(User user);
 
 
 }

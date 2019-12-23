@@ -35,4 +35,5 @@ public class TransferObject<T extends AbstractEntity> implements Serializable {
 		BeanUtils.copyProperties(obj, this);
 	}
 
+
 }

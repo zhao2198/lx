@@ -1,9 +1,7 @@
 package com.lx.user.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lx.user.entity.User;
-
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -14,8 +12,5 @@ import java.util.List;
  * @since 2019-12-21
  */
 public interface UserMapper extends BaseMapper<User> {
-
-
-    List<User> queryList(User user);
 
 }

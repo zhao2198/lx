@@ -1,9 +1,12 @@
-package com.lx.user.vo;
+package com.lx.user.entity;
 
-import com.lx.common.transfer.TransferObject;
-import com.lx.user.entity.User;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.lx.common.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -15,17 +18,19 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserVO extends TransferObject<User> {
+@Accessors(chain = true)
+@TableName("sys_user")
+public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Long userId;
 
     /**
      * 用户名
      */
-    private String userName;
+    private String username;
 
     /**
      * 密码

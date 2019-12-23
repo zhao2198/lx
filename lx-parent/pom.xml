@@ -27,11 +27,12 @@
         <commons.configuration.version>1.10</commons.configuration.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <common-collections4.version>4.0</common-collections4.version>
-        <guava.version>15.0</guava.version>
         <commons-beanutils.version>1.9.0</commons-beanutils.version>
         <commons-codec.version>1.8</commons-codec.version>
         <commons.io.version>2.5</commons.io.version>
         <dozer.version>5.4.0</dozer.version>
+
+        <commons.lang3.version>3.8.1</commons.lang3.version>
 
     </properties>
 
@@ -49,6 +50,7 @@
                 <artifactId>reflections</artifactId>
                 <version>${reflections.version}</version>
             </dependency>
+
 
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -72,6 +74,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
             </dependency>
 
             <dependency>
