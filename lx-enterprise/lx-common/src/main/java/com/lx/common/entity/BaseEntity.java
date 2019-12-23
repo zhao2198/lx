@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class BaseEntity extends AbstractEntity {
 
-    private Integer id;
+    private Long id;
 
     private Date createTime;
 
