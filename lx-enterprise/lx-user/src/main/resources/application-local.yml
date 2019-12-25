@@ -13,7 +13,7 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-eureka:
+#eureka:
   client:
     healthcheck:
       enabled: true
@@ -51,4 +51,7 @@ lx:
       max-period: 1000
       period: 100
 
-
+spring:
+  redis:
+    host: 192.168.119.19
+    port: 16379
