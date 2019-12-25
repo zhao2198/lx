@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 
 /**
  * 忽略Token验证
- * 
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -6,30 +6,30 @@ import java.util.Map;
 
 public interface BaseRepository<T> {
 
-	T get(Object id);
+    T get(Object id);
 
-	int save(T t);
+    int save(T t);
 
-	int save(Map<String, Object> map);
+    int save(Map<String, Object> map);
 
-	int saveBatch(List<T> list);
+    int saveBatch(List<T> list);
 
-	int update(T t);
+    int update(T t);
 
-	int update(Map<String, Object> map);
+    int update(Map<String, Object> map);
 
-	int delete(Object id);
+    int delete(Object id);
 
-	int delete(Map<String, Object> map);
+    int delete(Map<String, Object> map);
 
-	int deleteBatch(Object[] id);
+    int deleteBatch(Object[] id);
 
-	T queryObject(Object id);
+    T queryObject(Object id);
 
-	List<T> queryList(Map<String, Object> map);
+    List<T> queryList(Map<String, Object> map);
 
-	List<T> queryList(T t);
+    List<T> queryList(T t);
 
-	List<T> queryAll();
+    List<T> queryAll();
 
 }

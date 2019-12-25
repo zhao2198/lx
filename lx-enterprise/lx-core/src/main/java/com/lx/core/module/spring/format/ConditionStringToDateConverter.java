@@ -35,7 +35,7 @@ public class ConditionStringToDateConverter implements ConditionalGenericConvert
             if (StringUtils.isEmpty(value)) {
                 return null;
             } else {
-                JsonFormat jsonFormat = (JsonFormat)targetType.getAnnotation(JsonFormat.class);
+                JsonFormat jsonFormat = (JsonFormat) targetType.getAnnotation(JsonFormat.class);
                 if (jsonFormat != null) {
                     String pattern = jsonFormat.pattern();
                     if (StringUtils.isEmpty(pattern)) {

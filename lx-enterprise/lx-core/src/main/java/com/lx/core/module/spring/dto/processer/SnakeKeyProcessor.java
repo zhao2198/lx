@@ -47,7 +47,7 @@ public class SnakeKeyProcessor extends ServletModelAttributeMethodProcessor {
                 Field[] var4 = fields;
                 int var5 = fields.length;
 
-                for(int var6 = 0; var6 < var5; ++var6) {
+                for (int var6 = 0; var6 < var5; ++var6) {
                     Field field = var4[var6];
                     String fieldName = field.getName();
                     String snakeName = StringUtils.camelToUnderline(fieldName);
@@ -57,7 +57,7 @@ public class SnakeKeyProcessor extends ServletModelAttributeMethodProcessor {
                 CACHED_MAPPING_CLASS.put(clazz, map);
             }
 
-            return (Map)CACHED_MAPPING_CLASS.get(clazz);
+            return (Map) CACHED_MAPPING_CLASS.get(clazz);
         }
     }
 }

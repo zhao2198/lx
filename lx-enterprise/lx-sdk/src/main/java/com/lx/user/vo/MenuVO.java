@@ -18,7 +18,6 @@ import lombok.EqualsAndHashCode;
 public class MenuVO extends TransferObject<Menu> {
 
 
-
     private Long menuId;
 
     /**

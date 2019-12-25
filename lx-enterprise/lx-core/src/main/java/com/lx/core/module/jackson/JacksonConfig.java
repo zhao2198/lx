@@ -24,9 +24,9 @@ public class JacksonConfig {
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
-       // module.addSerializer(IBizEnum.class, new IBizEnumValueSerializer());
+        // module.addSerializer(IBizEnum.class, new IBizEnumValueSerializer());
         //module.addSerializer(Long.class, new LongValueSerializer());
-       // module.addSerializer(Date.class, new DateValueSerializer());
+        // module.addSerializer(Date.class, new DateValueSerializer());
         //module.setDeserializers(this.deserializers());
         //module.addDeserializer(Date.class, new DateValueDeserializer());
         objectMapper.registerModule(module);

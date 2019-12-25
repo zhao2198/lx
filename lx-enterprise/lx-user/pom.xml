@@ -17,8 +17,6 @@
     <dependencies>
 
 
-
-
         <dependency>
             <groupId>com.lx</groupId>
             <artifactId>lx-core</artifactId>
@@ -53,8 +51,8 @@
     </dependencies>
 
     <build>
-    <finalName>user</finalName>
-    <defaultGoal>package</defaultGoal>
+        <finalName>user</finalName>
+        <defaultGoal>package</defaultGoal>
     </build>
 
 

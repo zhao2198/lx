@@ -11,7 +11,9 @@ import java.lang.annotation.Target;
 @Repeatable(NGTJSONS.class)
 public @interface NGTJSON {
     Class<?> type();
+
     String include() default "";
+
     String filter() default "";
 }
 

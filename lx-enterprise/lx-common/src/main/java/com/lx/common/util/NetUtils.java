@@ -7,16 +7,16 @@ import java.net.InetAddress;
 
 public class NetUtils {
 
-public static final String LOCALHOST = "127.0.0.1";
-	
-	private static volatile InetAddress LOCAL_ADDRESS = null;
+    public static final String LOCALHOST = "127.0.0.1";
 
-	public static String getLogHost() {
-		InetAddress address = LOCAL_ADDRESS;
+    private static volatile InetAddress LOCAL_ADDRESS = null;
+
+    public static String getLogHost() {
+        InetAddress address = LOCAL_ADDRESS;
         return address == null ? LOCALHOST : address.getHostAddress();
-	}
-	
-	public static String getIpAddr(HttpServletRequest request) {
+    }
+
+    public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";
         }

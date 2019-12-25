@@ -33,7 +33,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
 
-
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         //resolvers.add(new CurrentUserResolver());
         resolvers.add(this.snakeKeyProcessor());

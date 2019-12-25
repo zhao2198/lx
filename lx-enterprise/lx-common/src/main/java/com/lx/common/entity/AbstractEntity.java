@@ -10,11 +10,9 @@ import java.io.Serializable;
 public abstract class AbstractEntity implements Serializable {
 
 
-
-
-	@Override
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this);
-	}
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
 
 }

@@ -12,8 +12,8 @@ import lombok.*;
 @TableName("tb_book")
 public class Book extends BaseEntity {
 
-	private String bookName;
-	private Double price;
-	private Integer bookType;
-	private String author;
+    private String bookName;
+    private Double price;
+    private Integer bookType;
+    private String author;
 }

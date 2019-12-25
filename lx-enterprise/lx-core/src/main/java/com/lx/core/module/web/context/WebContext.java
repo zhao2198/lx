@@ -13,7 +13,7 @@ public class WebContext {
     }
 
     public static HttpServletRequest getRequest() {
-        return (HttpServletRequest)CONTEXT_REQUEST.get();
+        return (HttpServletRequest) CONTEXT_REQUEST.get();
     }
 
     public static void cacheRequest(HttpServletRequest request) {
@@ -25,13 +25,12 @@ public class WebContext {
     }
 
 
-
     public static void cacheDisableTenantFlag(Boolean yes) {
         CONTEXT_DISABLE_TENANT.set(yes);
     }
 
     public static Boolean isDisableTenant() {
-        return (Boolean)CONTEXT_DISABLE_TENANT.get();
+        return (Boolean) CONTEXT_DISABLE_TENANT.get();
     }
 
     public static void cleanDisableTenantFlag() {
@@ -43,7 +42,7 @@ public class WebContext {
     }
 
     public static String getRemoteIp() {
-        return (String)CONTEXT_REMOTE_IP.get();
+        return (String) CONTEXT_REMOTE_IP.get();
     }
 
     public static void cleanRemoteIp() {

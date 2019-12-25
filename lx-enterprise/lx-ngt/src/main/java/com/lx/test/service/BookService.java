@@ -6,7 +6,7 @@ import com.lx.core.module.service.mybatis.BaseService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author zhaowei

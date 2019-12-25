@@ -29,7 +29,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     @Override
     public UserVO getUserById(Long id) {
         User user = userMapper.selectById(id);
-        if(null != user) {
+        if (null != user) {
             UserVO userVO = new UserVO();
             userVO.convert(user);
             return userVO;
@@ -41,7 +41,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     public List<UserVO> getUserList(User user) {
         List<User> list = userMapper.queryList(user);
         List<UserVO> voList = Lists.newArrayList();
-        if(CollectionUtils.isNotEmpty(list)) {
+        if (CollectionUtils.isNotEmpty(list)) {
 
             list.forEach(u -> {
                 UserVO userVO = new UserVO();

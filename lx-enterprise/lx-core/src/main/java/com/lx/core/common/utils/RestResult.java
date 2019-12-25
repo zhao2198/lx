@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RestResult<T> {
-	private Integer code;
-	
-	private String message;
+    private Integer code;
 
-	private String timestamp;
+    private String message;
 
-	private T data;
+    private String timestamp;
+
+    private T data;
 
 
 }

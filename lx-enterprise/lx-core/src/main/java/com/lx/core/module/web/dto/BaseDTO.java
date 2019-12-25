@@ -15,7 +15,7 @@ public abstract class BaseDTO<T> implements Serializable {
         } else if (!(o instanceof BaseDTO)) {
             return false;
         } else {
-            BaseDTO<?> other = (BaseDTO)o;
+            BaseDTO<?> other = (BaseDTO) o;
             return other.canEqual(this);
         }
     }

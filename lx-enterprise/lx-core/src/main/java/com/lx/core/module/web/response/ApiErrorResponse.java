@@ -82,11 +82,9 @@ public class ApiErrorResponse<T> {
     }
 
 
-
     protected boolean canEqual(final Object other) {
         return other instanceof ApiErrorResponse;
     }
-
 
 
     public String toString() {

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class MD5Util {
 
-	public static String md5(String path) throws FileNotFoundException, IOException {
-		return DigestUtils.md5Hex(new FileInputStream(path));
-	}
+    public static String md5(String path) throws FileNotFoundException, IOException {
+        return DigestUtils.md5Hex(new FileInputStream(path));
+    }
 }

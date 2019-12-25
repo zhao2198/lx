@@ -12,36 +12,36 @@ import java.io.Serializable;
 @Data
 public class PagingAttribute implements Serializable {
 
-	private static final long serialVersionUID = -8550189961954908201L;
+    private static final long serialVersionUID = -8550189961954908201L;
 
-	private int pageNo = 1;
+    private int pageNo = 1;
 
-	private int startIndex = 0;
-	private int currentPage=1;
+    private int startIndex = 0;
+    private int currentPage = 1;
 
-	private int pageSize = 10;
+    private int pageSize = 10;
 
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-		setPageNo(currentPage);
-	}
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+        setPageNo(currentPage);
+    }
 
-	public PagingAttribute() {
-	}
+    public PagingAttribute() {
+    }
 
-	public PagingAttribute(int pageNo) {
-		this.pageNo = pageNo > 0 ? pageNo : 1;
-	}
+    public PagingAttribute(int pageNo) {
+        this.pageNo = pageNo > 0 ? pageNo : 1;
+    }
 
-	public PagingAttribute(int pageNo, int pageSize) {
-		this(pageNo);
-		this.pageSize = pageSize;
-	}
+    public PagingAttribute(int pageNo, int pageSize) {
+        this(pageNo);
+        this.pageSize = pageSize;
+    }
 
-	public Page toPage() {
-		//return PageHelper.startPage(this.pageNo, this.pageSize, true);
-		return null;
+    public Page toPage() {
+        //return PageHelper.startPage(this.pageNo, this.pageSize, true);
+        return null;
 
-	}
+    }
 
 }

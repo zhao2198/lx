@@ -4,9 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lx.user.entity.RoleMenu">
-    <result column="id" property="id" />
-        <result column="role_id" property="roleId" />
-        <result column="menu_id" property="menuId" />
+        <result column="id" property="id"/>
+        <result column="role_id" property="roleId"/>
+        <result column="menu_id" property="menuId"/>
     </resultMap>
 
 </mapper>

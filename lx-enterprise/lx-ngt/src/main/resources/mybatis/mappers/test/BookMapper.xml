@@ -4,12 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lx.test.entity.Book">
-    <result column="id" property="id" />
-    <result column="create_time" property="createTime" />
-        <result column="book_name" property="bookName" />
-        <result column="book_type" property="bookType" />
-        <result column="price" property="price" />
-        <result column="author" property="author" />
+        <result column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="book_name" property="bookName"/>
+        <result column="book_type" property="bookType"/>
+        <result column="price" property="price"/>
+        <result column="author" property="author"/>
     </resultMap>
 
 </mapper>

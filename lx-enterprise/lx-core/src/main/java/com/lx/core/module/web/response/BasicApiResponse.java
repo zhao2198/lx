@@ -60,7 +60,6 @@ public class BasicApiResponse<T> {
     }
 
 
-
     public String toString() {
         return "BasicApiResponse(code=" + this.getCode() + ", message=" + this.getMessage() + ", timestamp=" + this.getTimestamp() + ", data=" + this.getData() + ")";
     }

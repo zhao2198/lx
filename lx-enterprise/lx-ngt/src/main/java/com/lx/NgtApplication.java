@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 })
 public class NgtApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(NgtApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(NgtApplication.class, args);
+    }
 
 }

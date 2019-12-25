@@ -19,6 +19,7 @@ public interface UserService extends BaseService<User> {
 
     /**
      * 根据用户ID查询用户
+     *
      * @param id
      * @return
      */

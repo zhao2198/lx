@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author zhaowei
@@ -30,7 +30,7 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping("/insert")
-    public ResponseEntity add(){
+    public ResponseEntity add() {
 
         Book book = new Book("庆余年", 20d, 1, "test");
         bookService.save(book);
@@ -44,8 +44,6 @@ public class BookController {
         return new ApiResponse().ok(bookVO);
 
     }
-
-
 
 
 }

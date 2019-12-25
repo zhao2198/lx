@@ -85,7 +85,7 @@ public class Sign {
         paramsMap.put("appid", "wxbb22392b3fefd76f");
         paramsMap.put("AppID", "4206209");
         /**paramsMap.put("FormKey1", "FormValue1");
-        paramsMap.put("FormKey2", "FormValue2");*/
+         paramsMap.put("FormKey2", "FormValue2");*/
 
         byte[] inputStreamBytes = new byte[]{};
 
@@ -166,7 +166,7 @@ public class Sign {
             if (value != null) {
                 if (value instanceof List) {
                     @SuppressWarnings("rawtypes")
-					List list = (List) value;
+                    List list = (List) value;
                     if (list.size() == 0) {
                         builder.append(key);
                     } else {
