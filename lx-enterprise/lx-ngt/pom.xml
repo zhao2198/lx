@@ -16,10 +16,7 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>com.lx</groupId>
-            <artifactId>lx-core</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>com.lx</groupId>
@@ -34,6 +31,11 @@
         <dependency>
             <groupId>com.lx</groupId>
             <artifactId>lx-framework-mybatis-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
 

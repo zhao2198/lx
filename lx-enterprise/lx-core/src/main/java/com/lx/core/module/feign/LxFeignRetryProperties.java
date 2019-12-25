@@ -1,12 +1,12 @@
-package com.lx.framework.configure.feign;
+package com.lx.core.module.feign;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
 @Data
-@ConfigurationProperties(prefix = "loc-feign-retry")
-public class LocFeignRetryProperties {
+@ConfigurationProperties(prefix = "lx.feign.retry")
+public class LxFeignRetryProperties {
 
   private long period = 100;
   private long maxPeriod = 1000;

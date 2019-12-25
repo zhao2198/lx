@@ -27,6 +27,12 @@ public class ApiResponse<T> extends BasicApiResponse<T> {
         return this.buildResponseEntity();
     }
 
+    public ResponseEntity<ApiResponse<T>> error() {
+        this.setCode(-1);
+        this.setMessage("error");
+        return this.buildResponseEntity();
+    }
+
     @JsonIgnore
     public boolean isOk() {
         return null != this.getCode() && this.getCode().equals(200);

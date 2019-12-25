@@ -1,10 +1,16 @@
+  
 server:
-  port: 8002
+  port: 9009
   tomcat:
     max-threads: 1000
     min-spare-threads: 30
   servlet:
     context-path: /
+spring:
+  boot:
+    admin:
+      ui:
+        title: 我的测试
 management:
   endpoints:
     web:
@@ -25,28 +31,11 @@ eureka:
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
     health-check-url-path: /actuator/health
+logging:
+  config: classpath:logback-spring.xml
+  file: D:/logs/springboot.log
 lx:
-  dataSource:
-    write:
-      username: root
-      password: 123456
-      jdbcUrl: jdbc:mysql://127.0.0.1:3306/ngt?serverTimezone=UTC
-      jdbcPool:
-        maximumPoolSize: 30
-        driverClassName: com.mysql.jdbc.Driver
-      configLocation: classpath:mybatis/mybatis-config.xml
-      basePackage: com.lx.*.mapper
-      typeAliasesPackage: com.lx.*.entity
-      mapperLocations: classpath:mybatis/mappers/*/*Mapper.xml
-  pagehelper:
-    pageSizeZero: true
-  swagger: true
   web:
     springmvc:
       cors:
         allow-headers: '*'
-  feign:
-    retry:
-      max-attempts: 0
-      max-period: 1000
-      period: 100

@@ -1,0 +1,15 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: register
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  server:
+    eviction-interval-timer-in-ms: 5000
+spring:
+  application:
+    name: register

@@ -5,6 +5,26 @@ server:
     min-spare-threads: 30
   servlet:
     context-path: /
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    health-check-url-path: /actuator/health
 lx:
   dataSource:
     write:
@@ -25,5 +45,10 @@ lx:
     springmvc:
       cors:
         allow-headers: '*'
+  feign:
+    retry:
+      max-attempts: 0
+      max-period: 1000
+      period: 100
 
 

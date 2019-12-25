@@ -19,12 +19,27 @@
 
         <dependency>
             <groupId>com.lx</groupId>
-            <artifactId>lx-common</artifactId>
+            <artifactId>lx-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.lx</groupId>
             <artifactId>lx-entity</artifactId>
+        </dependency>
+
+        <!--feign form -->
+        <dependency>
+            <groupId>io.github.openfeign.form</groupId>
+            <artifactId>feign-form</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign.form</groupId>
+            <artifactId>feign-form-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
     </dependencies>

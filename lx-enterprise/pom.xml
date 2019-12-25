@@ -28,6 +28,8 @@
         <module>lx-core</module>
 		<module>lx-ngt</module>
 		<module>lx-user</module>
+		<module>lx-register</module>
+		<module>lx-admin</module>
         <module>lx-code-generator</module>
     </modules>
 

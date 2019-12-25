@@ -1,0 +1,37 @@
+
+server:
+  port: 9009
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 30
+  servlet:
+    context-path: /
+spring:
+  boot:
+    admin:
+      ui:
+        title: 我的测试
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    health-check-url-path: /actuator/health
+logging:
+  config: classpath:logback-spring.xml
+  file: D:/logs/springboot.log
+

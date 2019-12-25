@@ -5,14 +5,17 @@ import com.lx.core.module.spring.response.ApiResponse;
 import com.lx.ngt.vo.BookVO;
 import com.lx.test.entity.Book;
 import com.lx.test.service.BookService;
+import com.lx.user.micro.UserClient;
+import com.lx.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.stereotype.Controller;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -29,6 +32,9 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    @Resource
+    private UserClient userClient;
+
     @PostMapping("/insert")
     public ResponseEntity add() {
 
@@ -43,6 +49,15 @@ public class BookController {
         BookVO bookVO = bookService.getBookById(id);
         return new ApiResponse().ok(bookVO);
 
+    }
+
+    @GetMapping("/feign")
+    public ResponseEntity testFeign() {
+        ApiResponse<UserVO> response = userClient.getUser(1l);
+        if(response.isOk()) {
+            return new ApiResponse().ok(response.getData());
+        }
+        return new ApiResponse().error();
     }
 
 

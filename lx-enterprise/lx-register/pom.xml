@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	  <parent>
         <groupId>com.lx</groupId>
         <artifactId>lx-enterprise</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>lx-user</artifactId>
+    <artifactId>lx-register</artifactId>
+	<properties>
+		<profile.active>local</profile.active>
+	</properties>
 
-    <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
-        <profile.active>local</profile.active>
-    </properties>
-
-    <dependencies>
+	<dependencies>
+	  <dependency>
+            <groupId>com.lx</groupId>
+            <artifactId>lx-core</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.lx</groupId>
@@ -25,37 +28,36 @@
             <groupId>com.lx</groupId>
             <artifactId>lx-framework-springmvc-starter</artifactId>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			
+		</dependency>
+<!--
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+-->
+		<!--
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+	</dependencies>
 
-        <dependency>
-            <groupId>com.lx</groupId>
-            <artifactId>lx-framework-mybatis-starter</artifactId>
-        </dependency>
+	<build>
+		<finalName>register</finalName>
+		<defaultGoal>package</defaultGoal>
+		
+	</build>
 
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-        </dependency>
-
-    </dependencies>
-
-    <build>
-        <finalName>user</finalName>
-        <defaultGoal>package</defaultGoal>
-    </build>
-
-
-    <profiles>
+	 <profiles>
         <profile>
             <id>local</id>
             <properties>
