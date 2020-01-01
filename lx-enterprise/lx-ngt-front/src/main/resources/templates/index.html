@@ -1,240 +1,303 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<!-- 首页所需css -->
-       <style type="text/css">
-	 		.class-font-color-red{color: red}
-			.class-font-color-green{color: green}
-			.screen-panel:HOVER{box-shadow: 0px 0px 30px gray !important;}
-			.screen-panel{color: #333;font-size:15px;background-color: white;transition:box-shadow 0.5s;min-height: 500px !important;}
-			.s1{
-			font-size: 14px;
-			color: #333333;
-		}
-		.s2{
-			font-size: 30px;
-			color: #333333;
-			font-family: ArialNarrow;
-		}
-		.s3{
-			font-size: 20px;
-			color: #999999;
-			font-family: MicrosoftYaHei;
-		}
-		.s4{
-			font-size: 20px;
-			font-weight:900;
-		}
-		.s5{
-			font-size: 18px;
-			color: #333333;
-			font-family: ArialMT;
-		}
-		.s6{
-			font-size: 12px;
-			color: #666666;
-			font-family: MicrosoftYaHei;
-		}
- 		</style>
+    <!-- 首页所需css -->
+    <style type="text/css">
+        .class-font-color-red {
+            color: red
+        }
+
+        .class-font-color-green {
+            color: green
+        }
+
+        .screen-panel:HOVER {
+            box-shadow: 0px 0px 30px gray !important;
+        }
+
+        .screen-panel {
+            color: #333;
+            font-size: 15px;
+            background-color: white;
+            transition: box-shadow 0.5s;
+            min-height: 500px !important;
+        }
+
+        .s1 {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .s2 {
+            font-size: 30px;
+            color: #333333;
+            font-family: ArialNarrow;
+        }
+
+        .s3 {
+            font-size: 20px;
+            color: #999999;
+            font-family: MicrosoftYaHei;
+        }
+
+        .s4 {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .s5 {
+            font-size: 18px;
+            color: #333333;
+            font-family: ArialMT;
+        }
+
+        .s6 {
+            font-size: 12px;
+            color: #666666;
+            font-family: MicrosoftYaHei;
+        }
+    </style>
 </head>
-  <body>
- 		
-       <div v-cloak class="wrapper wrapper-content" id="ngt">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-	                <div class="ibox float-e-margins screen-panel">
-	                    <div class="ibox-title">
-	                        <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">用电总量（本年）</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px;color: #2979ff;font-family: ArialMT;">{{electricQuantityVO.totalElectricQuantity}}</span>&nbsp;&nbsp;<span style="font-size: 16px;color: #333333;font-family: ArialMT;">kWh</span>
-	                    </div>
-	                    <div class="ibox-content">
-	                    	<div class="row">
-	                    		<div class="col-md-12" style="text-align: center;">
-	                    			<div class="row">
-	                    				<div class="col-md-4">
-	                    					<span class="s1">同比</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s1">环比</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s1">表计</span>
-	                    				</div>
-	                    			</div>
-	                    			<div class="row">
-	                    				<div class="col-md-4">
-	                    					<span class="s2" :class="yearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{electricQuantityVO.yearOnYear}}</span>&nbsp;&nbsp;<span class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4" :class="yearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{yearOnYearArrows}}</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s2" :class="monthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{electricQuantityVO.monthOnMonth}}</span>&nbsp;&nbsp;<span class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4" :class="monthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{monthOnMonthArrows}}</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s2">{{electricQuantityVO.meter}}</span>
-	                    				</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-	                    	<div class="row">
-	                    		<div class="col-md-12">
-					                <!-- <div class="ibox-content text-center p-md" id="electricQuantityEchart" style="height:300px;"> -->
-					                <div class="ibox-content text-center p-md" id="electricQuantityEchart" style="height:350px;">
-					                </div>
-	                    		</div>
-	                    	</div>
-	                    </div>
-	                </div>
-            	</div>
-	            <div class="col-lg-6">
-	                <div class="ibox float-e-margins screen-panel">
-	                    <div class="ibox-title">
-	                        <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">碳排放（本年）</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px;color: #2979ff;font-family: ArialMT;">{{carbonEmissionVO.totalElectricQuantity}}</span>&nbsp;&nbsp;<span style="font-size: 16px;color: #333333;font-family: ArialMT;">t</span>
-	                    </div>
-	                    <div class="ibox-content">
-	                    	<div class="row">
-	                    		<div class="col-md-12" style="text-align: center;">
-	                    			<div class="row">
-	                    				<div class="col-md-4">
-	                    					<span class="s1">同比</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s1">环比</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    				</div>
-	                    			</div>
-	                    			<div class="row">
-	                    				<div class="col-md-4">
-	                    					<span class="s2" :class="carbonEmissionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionVO.yearOnYear}}</span>&nbsp;&nbsp;<span class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4" :class="carbonEmissionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionYearOnYearArrows}}</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s2" :class="carbonEmissionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionVO.monthOnMonth}}</span>&nbsp;&nbsp;<span class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4" :class="carbonEmissionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionMonthOnMonthArrows}}</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    				</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-	                    	<div class="row">
-	                    		<div class="col-md-12">
-					                <div class="ibox-content text-center p-md"  id="carbonEmissionEchart" style="height:350px;">
-					                </div>
-	                    		</div>
-	                    	</div>
-	                    </div>
-	                </div>
-	            </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox float-e-margins screen-panel">
-                        <div class="ibox-title">
-                            <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">煤耗值（本年）</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px;color: #2979ff;font-family: ArialMT;">{{coalConsumptionVO.totalElectricQuantity}}</span>&nbsp;&nbsp;<span style="font-size: 16px;color: #333333;font-family: ArialMT;">t</span>
-                        </div>
-                        <div class="ibox-content">
-                        	<div class="row">
-	                    		<div class="col-md-12" style="text-align: center;">
-	                    			<div class="row">
-	                    				<div class="col-md-4">
-	                    					<span class="s1">同比</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s1">环比</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    				</div>
-	                    			</div>
-	                    			<div class="row">
-	                    				<div class="col-md-4">
-	                    					<span class="s2" :class="coalConsumptionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionVO.yearOnYear}}</span>&nbsp;&nbsp;<span class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4" :class="coalConsumptionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionYearOnYearArrows}}</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    					<span class="s2" :class="coalConsumptionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionVO.monthOnMonth}}</span>&nbsp;&nbsp;<span class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4" :class="coalConsumptionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionMonthOnMonthArrows}}</span>
-	                    				</div>
-	                    				<div class="col-md-4">
-	                    				</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-	                    	<div class="row">
-	                    		<div class="col-md-12">
-						                <div class="ibox-content text-center p-md"  id="coalConsumptionEchart" style="height:350px;">
-						                </div>
-	                    		</div>
-	                    	</div>
-	                    </div>
-                    </div>
+<body>
+
+<div v-cloak class="wrapper wrapper-content" id="ngt">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="ibox float-e-margins screen-panel">
+                <div class="ibox-title">
+                    <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">用电总量（本年）</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        style="font-size: 20px;color: #2979ff;font-family: ArialMT;">{{electricQuantityVO.totalElectricQuantity}}</span>&nbsp;&nbsp;<span
+                        style="font-size: 16px;color: #333333;font-family: ArialMT;">kWh</span>
                 </div>
-                <div class="col-lg-6">
-                    <div class="ibox float-e-margins screen-panel">
-                        <div class="ibox-title">
-                            <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">本月综合统计</span>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span class="s1">同比</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s1">环比</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s1">表计</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span class="s2"
+                                          :class="yearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{electricQuantityVO.yearOnYear}}</span>&nbsp;&nbsp;<span
+                                        class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4"
+                                                                                         :class="yearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{yearOnYearArrows}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s2"
+                                          :class="monthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{electricQuantityVO.monthOnMonth}}</span>&nbsp;&nbsp;<span
+                                        class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4"
+                                                                                         :class="monthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{monthOnMonthArrows}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s2">{{electricQuantityVO.meter}}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="ibox-content" style="padding-bottom: 0px;">
-                        	<div class="row" style="background-color: #edffff;margin:20px;padding:  20px 0px 20px 0px;">
-                        		<div class="col-md-2" style="text-align: center;margin-top: 15px;">
-                        			<img th:src="@{/public/img/gaojing.png}">
-                        		</div>
-                        		<div class="col-md-10">
-                        			<div class="row" style="text-align: center;">
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.totalAlarmFault}}</span><br><span class="s6">总告警</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.confirmAlarmFault}}</span><br><span class="s6">已确认</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.noConfirmAlarmFault}}</span><br><span class="s6">未确认</span></div>
-                        				<div class="col-md-3"></div>
-                        			</div>
-                        		</div>
-                        	</div>
-                        	<div class="row" style="background-color: #fff6f7;margin:20px;padding:  20px 0px 20px 0px;">
-                        		<div class="col-md-2" style="text-align: center;margin-top: 15px;">
-                        			<img th:src="@{/public/img/xiufu.png}">
-                        		</div>
-                        		<div class="col-md-10">
-                        			<div class="row" style="text-align: center;">
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.totalRepair}}</span><br><span class="s6">总修复</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.noRepair}}</span><br><span class="s6">未受理</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.ingRepair}}</span><br><span class="s6">修复中</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.yesRepair}}</span><br><span class="s6">已修复</span></div>
-                        			</div>
-                        		</div>
-                        	</div>
-                        	<div class="row" style="background-color: #f7faff;margin:20px;padding:  20px 0px 20px 0px;">
-                        		<div class="col-md-2" style="text-align: center;margin-top: 15px;">
-                        			<img th:src="@{/public/img/dingbao.png}">
-                        		</div>
-                        		<div class="col-md-10">
-                        			<div class="row" style="text-align: center;">
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.totalProtect}}</span><br><span class="s6">总定保</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.noPotect}}</span><br><span class="s6">未受理</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.ingProtect}}</span><br><span class="s6">定保中</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.yesProtect}}</span><br><span class="s6">已定保</span></div>
-                        			</div>
-                        		</div>
-                        	</div>
-                        	<div class="row" style="background-color: #fff9f3;margin:20px;padding:  20px 0px 20px 0px;">
-                        		<div class="col-md-2" style="text-align: center;margin-top: 15px;">
-                        			<img th:src="@{/public/img/xunjian.png}">
-                        		</div>
-                        		<div class="col-md-10">
-                        			<div class="row" style="text-align: center;">
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.totalPolling}}</span><br><span class="s6">总巡检</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.noPolling}}</span><br><span class="s6">未受理</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.ingPolling}}</span><br><span class="s6">巡检中</span></div>
-                        				<div class="col-md-3"><span class="s5">{{totalCountVO.yesPolling}}</span><br><span class="s6">已巡检</span></div>
-                        			</div>
-                        		</div>
-                        	</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <div class="ibox-content text-center p-md" id="electricQuantityEchart" style="height:300px;"> -->
+                            <div class="ibox-content text-center p-md" id="electricQuantityEchart"
+                                 style="height:350px;">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    
-     
-  </body>
-  
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins screen-panel">
+                <div class="ibox-title">
+                    <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">碳排放（本年）</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        style="font-size: 20px;color: #2979ff;font-family: ArialMT;">{{carbonEmissionVO.totalElectricQuantity}}</span>&nbsp;&nbsp;<span
+                        style="font-size: 16px;color: #333333;font-family: ArialMT;">t</span>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span class="s1">同比</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s1">环比</span>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span class="s2"
+                                          :class="carbonEmissionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionVO.yearOnYear}}</span>&nbsp;&nbsp;<span
+                                        class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4"
+                                                                                         :class="carbonEmissionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionYearOnYearArrows}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s2"
+                                          :class="carbonEmissionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionVO.monthOnMonth}}</span>&nbsp;&nbsp;<span
+                                        class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4"
+                                                                                         :class="carbonEmissionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{carbonEmissionMonthOnMonthArrows}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ibox-content text-center p-md" id="carbonEmissionEchart" style="height:350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins screen-panel">
+                <div class="ibox-title">
+                    <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">煤耗值（本年）</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        style="font-size: 20px;color: #2979ff;font-family: ArialMT;">{{coalConsumptionVO.totalElectricQuantity}}</span>&nbsp;&nbsp;<span
+                        style="font-size: 16px;color: #333333;font-family: ArialMT;">t</span>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span class="s1">同比</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s1">环比</span>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span class="s2"
+                                          :class="coalConsumptionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionVO.yearOnYear}}</span>&nbsp;&nbsp;<span
+                                        class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4"
+                                                                                         :class="coalConsumptionYearOnYearColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionYearOnYearArrows}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="s2"
+                                          :class="coalConsumptionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionVO.monthOnMonth}}</span>&nbsp;&nbsp;<span
+                                        class="s3">%</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="s4"
+                                                                                         :class="coalConsumptionMonthOnMonthColorClass == true ? 'class-font-color-red' : 'class-font-color-green'">{{coalConsumptionMonthOnMonthArrows}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ibox-content text-center p-md" id="coalConsumptionEchart" style="height:350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins screen-panel">
+                <div class="ibox-title">
+                    <span style="font-size: 18px;color: #555555;font-family: MicrosoftYaHei;">本月综合统计</span>
+                </div>
+                <div class="ibox-content" style="padding-bottom: 0px;">
+                    <div class="row" style="background-color: #edffff;margin:20px;padding:  20px 0px 20px 0px;">
+                        <div class="col-md-2" style="text-align: center;margin-top: 15px;">
+                            <img th:src="@{/public/img/gaojing.png}">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.totalAlarmFault}}</span><br><span
+                                        class="s6">总告警</span></div>
+                                <div class="col-md-3"><span
+                                        class="s5">{{totalCountVO.confirmAlarmFault}}</span><br><span
+                                        class="s6">已确认</span></div>
+                                <div class="col-md-3"><span
+                                        class="s5">{{totalCountVO.noConfirmAlarmFault}}</span><br><span
+                                        class="s6">未确认</span></div>
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="background-color: #fff6f7;margin:20px;padding:  20px 0px 20px 0px;">
+                        <div class="col-md-2" style="text-align: center;margin-top: 15px;">
+                            <img th:src="@{/public/img/xiufu.png}">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.totalRepair}}</span><br><span
+                                        class="s6">总修复</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.noRepair}}</span><br><span
+                                        class="s6">未受理</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.ingRepair}}</span><br><span
+                                        class="s6">修复中</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.yesRepair}}</span><br><span
+                                        class="s6">已修复</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="background-color: #f7faff;margin:20px;padding:  20px 0px 20px 0px;">
+                        <div class="col-md-2" style="text-align: center;margin-top: 15px;">
+                            <img th:src="@{/public/img/dingbao.png}">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.totalProtect}}</span><br><span
+                                        class="s6">总定保</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.noPotect}}</span><br><span
+                                        class="s6">未受理</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.ingProtect}}</span><br><span
+                                        class="s6">定保中</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.yesProtect}}</span><br><span
+                                        class="s6">已定保</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="background-color: #fff9f3;margin:20px;padding:  20px 0px 20px 0px;">
+                        <div class="col-md-2" style="text-align: center;margin-top: 15px;">
+                            <img th:src="@{/public/img/xunjian.png}">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.totalPolling}}</span><br><span
+                                        class="s6">总巡检</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.noPolling}}</span><br><span
+                                        class="s6">未受理</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.ingPolling}}</span><br><span
+                                        class="s6">巡检中</span></div>
+                                <div class="col-md-3"><span class="s5">{{totalCountVO.yesPolling}}</span><br><span
+                                        class="s6">已巡检</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
 </html>
 
- <script type="text/javascript" th:src="@{/public/vendor/echars/echarts.min.js}"></script>
- <script type="text/javascript" th:src="@{/public/vendor/echars/echarts.common.min.js}"></script>
- <script type="text/javascript" th:src="@{/public/js/analysis/screen.js}"></script>
+<script type="text/javascript" th:src="@{/public/vendor/echars/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/public/vendor/echars/echarts.common.min.js}"></script>
+<script type="text/javascript" th:src="@{/public/js/analysis/screen.js}"></script>
 
 
 

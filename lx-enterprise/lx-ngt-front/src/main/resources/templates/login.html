@@ -1,208 +1,204 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>front</title>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-  <meta name="description" content="Bootstrap Admin App + jQuery"/>
-  <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin"/>
+    <title>front</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="description" content="Bootstrap Admin App + jQuery"/>
+    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin"/>
 
 
- <link rel="icon" th:href="@{/public/img/fav.png}">
-<link rel="shortcut icon" th:href="@{/public/img/fav.png}" />
-  
- <link th:href="@{/public/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="icon" th:href="@{/public/img/fav.png}">
+    <link rel="shortcut icon" th:href="@{/public/img/fav.png}"/>
+
+    <link th:href="@{/public/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/public/font-awesome/css/font-awesome.css}" rel="stylesheet">
 
     <link th:href="@{/public/css/iconfont.css}" rel="stylesheet">
     <link th:href="@{/public/css/style.css}" rel="stylesheet">
-    
-  
-  
+
+
 </head>
 <body class="gray-bg">
 
- <div id="temp">
+<div id="temp">
 
-			<div class="bgs">
-				<div class="bigDiv">
-					<div class="loginDiv">
-						<p class="userLogin">用户登陆</p>
-						<form id="loginForm" class="form-signin" data-parsley-validate="" onsubmit="return false">
-						<div class="LoGinPadding" id="loginPage">
-							
-							<div class="divs">
-								<input type="text" placeholder="账号"  class="inputs" v-model="username" data-parsley-error-message="请输入帐号" data-parsley-required="true" />
-								<i class="iconfont icon-yonghuming iconss"></i>
-							</div>
-							<div class="divs">
-								<input type="password" placeholder="密码" v-model="password"  class="inputs" data-parsley-error-message="请输入密码" data-parsley-required="true" />
-								<i class="iconfont icon-mima iconss"></i>
-							</div>
-							
-							<div id="errorMsg" class="divs alert alert-danger text-center" style="display:none;"></div>
-							<div class="Loginbtn">
-								
-								<input type="submit" id="submit" class="btns" value="登录" v-on:click="login" />
-							</div>
-							<div class="checkedNum">
-								
-								<input type="checkbox" :checked="isRemember" @click="doRememberPassword();" /> 记住密码
-							</div>
-						</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="foots">
+    <div class="bgs">
+        <div class="bigDiv">
+            <div class="loginDiv">
+                <p class="userLogin">用户登陆</p>
+                <form id="loginForm" class="form-signin" data-parsley-validate="" onsubmit="return false">
+                    <div class="LoGinPadding" id="loginPage">
 
-			</div>
-		</div>
-	</div>
-	
+                        <div class="divs">
+                            <input type="text" placeholder="账号" class="inputs" v-model="username"
+                                   data-parsley-error-message="请输入帐号" data-parsley-required="true"/>
+                            <i class="iconfont icon-yonghuming iconss"></i>
+                        </div>
+                        <div class="divs">
+                            <input type="password" placeholder="密码" v-model="password" class="inputs"
+                                   data-parsley-error-message="请输入密码" data-parsley-required="true"/>
+                            <i class="iconfont icon-mima iconss"></i>
+                        </div>
 
-	
-	
-	 <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
-	 <script type="text/javascript" th:src="@{/public/vendor/vue/polyfill.min.js}"></script>
-    <script type="text/javascript" th:src="@{/public/vendor/vue/vue.min.js}"></script>
-    <script type="text/javascript" th:src="@{/public/vendor/parsleyjs/parsley.js}"></script>
- <script type="text/javascript" th:src="@{/public/vendor/axios/axios.min.js}"></script>
- <script type="text/javascript" th:src="@{/public/js/common/comm.js}"></script>
-	<script th:inline="javascript">
-	  var ssoUrl = [[${#httpServletRequest.getAttribute("ssoUrl")}]];
-	  var baseUrl = [[${#servletContext.contextPath}]];
-	
-		var loginPage = new Vue({
-			el : '#loginPage',
-			data : {
-				'username' : '',
-				'password' : '',
-				isRemember:false,
-			},
-			mounted: function() {
-		        this.loadAccount();
-		    },
-			methods : {
-				login : function(event) {
-                    window.open(baseUrl + "/", '_self');
-				    /*
-					var ok = $('#loginForm').parsley().isValid({force: true});
-            		if(!ok){
-            			return;
-            		}
-					var datas = {
-						username : this.username,
-						password : this.password
-					};
-					
-					var config = {
-			                headers: {
-			                  'Content-Type': 'multipart/form-data'
-			                }
-			              };
-			    	var formData = new FormData();
-			        
-			        for (var key in datas){
-			        	var val = datas[key];
-			        	if(val!= undefined){
-			        		formData.append(key, val);
-			        	}
-			        }
-			        var _this = this;
-			        var accountInfo = this.username + "&" + this.password;
+                        <div id="errorMsg" class="divs alert alert-danger text-center" style="display:none;"></div>
+                        <div class="Loginbtn">
 
-					axios.post(ssoUrl + 'user/login',formData,config)
-			          .then(function (res) {
-			        	  if(res.data.code=="10000"){
-			        		 addCookie("NGT_TOKEN",res.data.data,-1);
-			        		 if(_this.isRemember) {
-			        			 _this.setCookie('accountInfo',accountInfo,1440*3)
-			        		 }else{
-			        			 _this.delCookie('accountInfo');
-			        		 }
-           				      window.open(baseUrl + "/", '_self');
-           				  }else{ 
-           					 $("#errorMsg").html(res.data.message);
-           	    		  $("#errorMsg").show();
-           				  }
-			          })
-			          .catch(function (error) {
-			            console.log(error);
-			          });
+                            <input type="submit" id="submit" class="btns" value="登录" v-on:click="login"/>
+                        </div>
+                        <div class="checkedNum">
 
-			          */
-					
-					
+                            <input type="checkbox" :checked="isRemember" @click="doRememberPassword();"/> 记住密码
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="foots">
 
-				},
-				doRememberPassword:function(){
-					
-		            var isRemember = this.isRemember;
-		            this.isRemember = !isRemember;
-				},
-				loadAccount: function(){
-					 
-		            var _this = this;
-		            var accountInfo = this.getCookie('accountInfo');
-		 
-		           
-		            if(Boolean(accountInfo) == false){
-		                return false;
-		            }
-		            else{
-		                
-		                var index = accountInfo.indexOf("&");
-		 
-		                var username = accountInfo.substring(0,index);
-		                var password = accountInfo.substring(index+1);
-		 
-		                this.username = username;
-		                this.password = password;
-		                this.isRemember = true;
-		            }
-		        },
-				setCookie: function(c_name,value,expiremMinutes){
-				    var exdate = new Date();
-				    exdate.setTime(exdate.getTime() + expiremMinutes * 60 * 1000);
-				    document.cookie= c_name + "=" + escape(value)+((expiremMinutes==null) ? "" : ";expires="+exdate.toGMTString());
-				},
-				 
-				// 读取cookie
-				getCookie: function(c_name){
-				    if (document.cookie.length>0)
-				    {
-				        var c_start=document.cookie.indexOf(c_name + "=");
-				        if (c_start!=-1)
-				        { 
-				        c_start=c_start + c_name.length+1;
-				        var c_end=document.cookie.indexOf(";",c_start);
-				        if (c_end==-1) 
-				            c_end = document.cookie.length
-				            return unescape(document.cookie.substring(c_start, c_end))
-				        }
-				    }
-				    return ""   
-				},
-				 
-				// 删除cookie
-				delCookie: function(c_name){
-				    var exp = new Date();
-				    exp.setTime(exp.getTime() - 1);
-				    var cval = this.getCookie(c_name);
-				    if(cval!=null){
-				        document.cookie = c_name + "=" + cval + ";expires=" + exp.toGMTString();
-				    }
-				}
+    </div>
+</div>
+</div>
 
-			}
-		})
-		
-		$("body").keydown(function() {
-			  if (event.keyCode == "13") {//keyCode=13是回车键
-			    $("#submit").click();
-			  }
-			});
-	</script>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/public/vendor/vue/polyfill.min.js}"></script>
+<script type="text/javascript" th:src="@{/public/vendor/vue/vue.min.js}"></script>
+<script type="text/javascript" th:src="@{/public/vendor/parsleyjs/parsley.js}"></script>
+<script type="text/javascript" th:src="@{/public/vendor/axios/axios.min.js}"></script>
+<script type="text/javascript" th:src="@{/public/js/common/comm.js}"></script>
+<script th:inline="javascript">
+    var ssoUrl = [[${#httpServletRequest.getAttribute("ssoUrl")}]];
+    var baseUrl = [[${#servletContext.contextPath}]];
+
+    var loginPage = new Vue({
+        el: '#loginPage',
+        data: {
+            'username': '',
+            'password': '',
+            isRemember: false,
+        },
+        mounted: function () {
+            this.loadAccount();
+        },
+        methods: {
+            login: function (event) {
+                window.open(baseUrl + "/", '_self');
+                /*
+                var ok = $('#loginForm').parsley().isValid({force: true});
+                if(!ok){
+                    return;
+                }
+                var datas = {
+                    username : this.username,
+                    password : this.password
+                };
+
+                var config = {
+                        headers: {
+                          'Content-Type': 'multipart/form-data'
+                        }
+                      };
+                var formData = new FormData();
+
+                for (var key in datas){
+                    var val = datas[key];
+                    if(val!= undefined){
+                        formData.append(key, val);
+                    }
+                }
+                var _this = this;
+                var accountInfo = this.username + "&" + this.password;
+
+                axios.post(ssoUrl + 'user/login',formData,config)
+                  .then(function (res) {
+                      if(res.data.code=="10000"){
+                         addCookie("NGT_TOKEN",res.data.data,-1);
+                         if(_this.isRemember) {
+                             _this.setCookie('accountInfo',accountInfo,1440*3)
+                         }else{
+                             _this.delCookie('accountInfo');
+                         }
+                             window.open(baseUrl + "/", '_self');
+                         }else{
+                            $("#errorMsg").html(res.data.message);
+                         $("#errorMsg").show();
+                         }
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+
+                  */
+
+
+            },
+            doRememberPassword: function () {
+
+                var isRemember = this.isRemember;
+                this.isRemember = !isRemember;
+            },
+            loadAccount: function () {
+
+                var _this = this;
+                var accountInfo = this.getCookie('accountInfo');
+
+
+                if (Boolean(accountInfo) == false) {
+                    return false;
+                }
+                else {
+
+                    var index = accountInfo.indexOf("&");
+
+                    var username = accountInfo.substring(0, index);
+                    var password = accountInfo.substring(index + 1);
+
+                    this.username = username;
+                    this.password = password;
+                    this.isRemember = true;
+                }
+            },
+            setCookie: function (c_name, value, expiremMinutes) {
+                var exdate = new Date();
+                exdate.setTime(exdate.getTime() + expiremMinutes * 60 * 1000);
+                document.cookie = c_name + "=" + escape(value) + ((expiremMinutes == null) ? "" : ";expires=" + exdate.toGMTString());
+            },
+
+            // 读取cookie
+            getCookie: function (c_name) {
+                if (document.cookie.length > 0) {
+                    var c_start = document.cookie.indexOf(c_name + "=");
+                    if (c_start != -1) {
+                        c_start = c_start + c_name.length + 1;
+                        var c_end = document.cookie.indexOf(";", c_start);
+                        if (c_end == -1)
+                            c_end = document.cookie.length
+                        return unescape(document.cookie.substring(c_start, c_end))
+                    }
+                }
+                return ""
+            },
+
+            // 删除cookie
+            delCookie: function (c_name) {
+                var exp = new Date();
+                exp.setTime(exp.getTime() - 1);
+                var cval = this.getCookie(c_name);
+                if (cval != null) {
+                    document.cookie = c_name + "=" + cval + ";expires=" + exp.toGMTString();
+                }
+            }
+
+        }
+    })
+
+    $("body").keydown(function () {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            $("#submit").click();
+        }
+    });
+</script>
 </body>
 </html>

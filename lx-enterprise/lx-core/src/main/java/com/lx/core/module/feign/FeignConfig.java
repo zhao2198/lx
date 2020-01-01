@@ -28,8 +28,8 @@ import java.util.TimeZone;
  * description
  *
  * @Project FeignConfig(com.huaxing.config)
- * @Author  zhaowei
- * @Date    2019/10/7 17:05
+ * @Author zhaowei
+ * @Date 2019/10/7 17:05
  * @Version v1.1.0
  */
 
@@ -45,7 +45,7 @@ public class FeignConfig {
     }
 
 
-    public ObjectMapper customObjectMapper(){
+    public ObjectMapper customObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         //Customize as much as you want
         objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
@@ -59,6 +59,7 @@ public class FeignConfig {
 
     /**
      * 日志级别
+     *
      * @return
      */
     @Bean
@@ -75,14 +76,17 @@ public class FeignConfig {
     public BasicAuthRequestInterceptor myBasicAuthRequestInterceptor(){
         return new BasicAuthRequestInterceptor("user","password");
     }*/
+
     /**
      * 创建Feign请求拦截器，在发送请求前设置认证的token,各个微服务将token设置到环境变量中来达到通用
+     *
      * @return
      */
     @Bean
     public FeignBasicAuthRequestInterceptor basicAuthRequestInterceptor() {
         return new FeignBasicAuthRequestInterceptor();
     }
+
     @Bean
     public Request.Options options() {
         return new Request.Options(5000, 10000);
@@ -103,8 +107,6 @@ public class FeignConfig {
 //    public Feign.Builder feignBuilder() {
 //        return Feign.builder();
 //    }
-
-
 
 
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {

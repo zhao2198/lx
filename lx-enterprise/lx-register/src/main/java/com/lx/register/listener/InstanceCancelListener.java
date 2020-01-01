@@ -12,6 +12,6 @@ import org.springframework.lang.NonNull;
 public class InstanceCancelListener implements ApplicationListener<EurekaInstanceCanceledEvent> {
     @Override
     public void onApplicationEvent(@NonNull EurekaInstanceCanceledEvent event) {
-        log.info("服务:{}挂了",event.getAppName());
+        log.info("服务:{}挂了", event.getAppName());
     }
 }

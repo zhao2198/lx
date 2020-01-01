@@ -20,12 +20,12 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class LxFeignRetryAutoConfiguration {
 
-  @Bean
-  @ConditionalOnProperty(value = "lx.feign.retry.enabled", matchIfMissing = true)
-  public Retryer feignRetryer(LxFeignRetryProperties locFeignRetryProperties) {
-    return new Retryer.Default(locFeignRetryProperties.getPeriod(),
-        TimeUnit.MILLISECONDS.toMillis(locFeignRetryProperties.getMaxPeriod()),
-        locFeignRetryProperties.getMaxAttempts());
-  }
+    @Bean
+    @ConditionalOnProperty(value = "lx.feign.retry.enabled", matchIfMissing = true)
+    public Retryer feignRetryer(LxFeignRetryProperties locFeignRetryProperties) {
+        return new Retryer.Default(locFeignRetryProperties.getPeriod(),
+                TimeUnit.MILLISECONDS.toMillis(locFeignRetryProperties.getMaxPeriod()),
+                locFeignRetryProperties.getMaxAttempts());
+    }
 
 }

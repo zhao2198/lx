@@ -11,9 +11,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 public class AdminApplication {
 
 
-
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(AdminApplication.class, args);
-	}
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(AdminApplication.class, args);
+    }
 
 }

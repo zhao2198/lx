@@ -20,7 +20,7 @@
 Vue.component('pageination', {
     props: ['total', 'size', 'page', 'changge', 'isUrl'],
     template: '#pageination',
-    data:function() {
+    data: function () {
         return {
             pageinationTotal: this.total,//总条目数
             pageinationSize: this.size ? this.size : 10,//每页显示条目个数
@@ -34,12 +34,12 @@ Vue.component('pageination', {
         }
     },
     methods: {
-        jump:function(item) {
+        jump: function (item) {
             this.pageinationCurrentPage = item;
             this.pagers();
             this.pageChangge(this.pageinationCurrentPage, this.pageinationSize);
         },//跳转页码
-        pagers:function() {
+        pagers: function () {
             //可分页数
             this.pageinationPage = Math.ceil(this.pageinationTotal / this.pageinationSize);
             //url修改
@@ -78,7 +78,7 @@ Vue.component('pageination', {
                 this.pageinationLength.push(i);
             }
         },//计算分页显示的数字
-        pageUp:function(state) {
+        pageUp: function (state) {
             if (this.startDisabled) return;
             if (this.pageinationCurrentPage - 1 != 0 && state == 1) {
                 this.jump(this.pageinationCurrentPage - 1);
@@ -86,7 +86,7 @@ Vue.component('pageination', {
                 this.jump(1);
             }
         },//上一页跟首页 state=1是上一页 state=0是首页
-        pageDown:function(state) {
+        pageDown: function (state) {
             if (this.endDisabled) return;
             if (this.pageinationCurrentPage + 1 != this.pageinationPage && state == 1) {
                 this.jump(this.pageinationCurrentPage + 1);
@@ -94,18 +94,18 @@ Vue.component('pageination', {
                 this.jump(this.pageinationPage);
             }
         },// state=1是下一页 state=0是尾页
-        pageCurrentChange:function() {
+        pageCurrentChange: function () {
             this.pageChangge(this.pageinationCurrentPage, this.pageinationSize);
             this.pagers();
         },
-        pageSizeChange:function() {
-        	//this.pageinationSize = $("#pageSize").val(); 
-        	 this.pageChangge(this.pageinationCurrentPage, this.pageinationSize);
-        	 this.pagers();
+        pageSizeChange: function () {
+            //this.pageinationSize = $("#pageSize").val(); 
+            this.pageChangge(this.pageinationCurrentPage, this.pageinationSize);
+            this.pagers();
         }
     },
-    created:function() {
-       // this.pageCurrentChange();
+    created: function () {
+        // this.pageCurrentChange();
     },
     watch: {
         total: function (val, oldVal) {

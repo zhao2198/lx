@@ -1,221 +1,237 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<link th:href="@{/public/css/plugins/ztree/ztree.css}" rel="stylesheet">
+    <link th:href="@{/public/css/plugins/ztree/ztree.css}" rel="stylesheet">
 </head>
 <body>
-	<div v-cloak class="wrapper wrapper-content" id="ngt">
+<div v-cloak class="wrapper wrapper-content" id="ngt">
 
 
-		<div class="row" v-show="showList">
-			<div class="col-lg-12">
-				<div class="ibox">
-					<div class="ibox-title">
-						<h5>角色列表</h5>
+    <div class="row" v-show="showList">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>角色列表</h5>
 
-					</div>
-					<div class="ibox-content">
+                </div>
+                <div class="ibox-content">
 
-						<div class="table-responsive">
-							<div id="DataTables_Table_0_wrapper"
-								class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div class="table-responsive">
+                        <div id="DataTables_Table_0_wrapper"
+                             class="dataTables_wrapper form-inline dt-bootstrap">
 
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="ibox">
-											<span>角色名称：</span> <input class=" form-control" type="text" maxlength="64" v-model="roleName">
-											<button class="btn btn-primary " type="button" @click="search();"><i class="fa fa-search"></i>&nbsp;查询</button>
-											<button class="btn btn-primary" type="button" @click="reset();"><i class="fa fa-search"></i>&nbsp;重置</button>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-lg-12" id="pull-left">
-										<div class="pull-left">
-										<button class="btn btn-primary " type="button" @click="initAdd();"><i class="fa fa-plus-square"></i>&nbsp;添加</button>
-														<button class="btn btn-primary " type="button" @click="deleteAll();"><i class="fa fa-times-circle"></i>&nbsp;删除</button>
-
-										</div>
-									</div>
-								</div>
-
-
-
-								<table
-									class="table table-striped table-bordered table-hover dataTables-example dataTable"
-									id="DataTables_Table_0"
-									aria-describedby="DataTables_Table_0_info" role="grid">
-									<thead>
-										<tr role="row">
-											<th tabindex="0" width="50px;">
-											<div class="checkbox checkbox-success checkbox-inline">
-														<input class="checkbox checkbox-success" id="all" type="checkbox" :checked="allCheck" @click="checkAll();">
-				                                            
-				                                            <label for="all"> </label>
-                                        				</div>
-											</th>
-												<th>角色名称</th>
-												<th>英文名称</th>
-												<th>归属机构</th>
-												<th>是否可用</th>
-												<th>备注信息</th>
-												<th width="100">操作</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="gradeA odd" role="row" v-for="(item,index) in list">
-											<td>
-											<div class="checkbox checkbox-success checkbox-inline" v-if="item.enname!='sys'">
-				                                            <input type="checkbox" id="'child' + index" :value="item.id" @click="selectedItem(item)" 
-														:checked="item.ischecked" class="checkbox checkbox-success">
-				                                            <label for="'child' + index"> </label>
-                                        				</div>
-											
-											</td>
-																						
-																						<td>{{item.name}}</td>
-																						<td>{{item.enname}}</td>
-																						<td>{{item.officeName}}</td>
-																						<td>{{item.useable==1?'是':'否'}}</td>
-																						<td>{{item.remarks}}</td>
-																						<td>
-												<div class="btn-group" v-if="item.enname!='sys'">
-															<button class="btn-white btn" type="button" title="修改" @click="initUpdate(item.id)"><i class="fa fa-edit text-navy"></i></button>
-															<button class="btn-white btn" type="button" title="删除" @click="deleteItem(item.id)"><i class="fa fa-remove text-navy"></i></button>
-																
-															</div>
-												
-												<div class="btn-group" v-if="item.enname!='sys'">
-													<button @click="initRole(item)" class="btn-white btn" data-toggle="modal" data-target="#permission" title="权限设备"><i class="fa fa-gear text-navy"></i></button>
-													<!-- 
-													<button @click="initUser(item)" class="btn-white btn" ><i class="fa fa-gears text-navy"></i></button>
-													 -->
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<pageination :total="page.total" :size="page.size"
-									:page="page.curPage" :changge="pageFn"></pageination>
-
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		
-
-		<!-- add -->
-
-		<div class="row" v-show="!showList">
-			<div class="col-lg-12">
-				<div class="ibox float-e-margins panel panel-primary">
-					<div class="ibox-title panel-heading">
-						<h5>{{actionName}}角色</h5>
-					</div>
-					<div class="ibox-content panel-body">
-						<form id="form" method="get" class="form-horizontal"
-							data-parsley-validate="" onsubmit="return false">
-							<input type="hidden" name="id" v-model="roleVO.id" />
-
-																													
-								<div class="form-group">
-								<label class="col-sm-2 control-label"><font color="red">*</font>角色名称：</label>
-
-								<div class="col-sm-4">
-									<input name="name" v-model="roleVO.name" type="text"
-										class="form-control" maxlength="30"
-										data-parsley-length="[2, 30]"
-										data-parsley-length-message="角色名称在2-30个字符之间" required=""
-										data-parsley-required-message="角色名称 为必填字段" >
-								</div>
-							</div>
-
-																													
-								<div class="form-group">
-								<label class="col-sm-2 control-label"><font color="red">*</font>英文名称：</label>
-
-								<div class="col-sm-4">
-									<input name="enname" v-model="roleVO.enname" type="text"
-										class="form-control" data-parsley-length="[2, 30]"
-										data-parsley-length-message="英文名称在2-30个字符之间" 
-										data-parsley-required="true"
-										data-parsley-required-message="英文名称为必填字段" 
-										data-parsley-pattern=^[A-Za-z]+$ 
-										data-parsley-pattern-message="英文名称必须为字母"  />
-								</div>
-							</div>
-
-																													
-								<div class="form-group">
-								<label class="col-sm-2 control-label"><font color="red">*</font>是否可用：</label>
-
-								<div class="col-sm-4">
-										
-										<select name="type" v-model="roleVO.useable" class="form-control m-b" required=""
-										data-parsley-required-message="是否可用为必填字段">
-										
-										<option value="1">是</option>
-										<option value="0">否</option>
-									</select>
-										
-								</div>
-							</div>
-
-						
-																													
-								<div class="form-group">
-								<label class="col-sm-2 control-label">备注信息：</label>
-
-								<div class="col-sm-4">
-									<input name="remarks" v-model="roleVO.remarks" type="text"
-										class="form-control" maxlength="100"
-										data-parsley-length="[0, 100]"
-										data-parsley-length-message="备注信息最大长度为100个字符" />
-								</div>
-							</div>
-
-																					
-							<div class="form-group">
-								<div class="col-sm-4 col-sm-offset-3">
-
-									<button class="btn btn-primary" type="submit" @click="save();">保存</button>
-									<button class="btn btn-white btn-pad" type="button" @click="cancle();">取消</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- add menus -->
-		<div class="modal inmodal" id="permission" tabindex="-1"   aria-hidden="true" data-backdrop="static">
-                                <div class="modal-dialog">
-                                    <div class="modal-content animated fadeIn">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <h4 class="modal-title">分配权限</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                        	<input type="hidden" v-model="roleId" />
-                                             <div id="ztree" class="ztree"></div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-white btn-pad" data-dismiss="modal">关闭</button>
-                                            
-                                            <button type="button" @click="saveMenus();" class="btn btn-primary">确定</button>
-                                            
-                                        </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ibox">
+                                        <span>角色名称：</span> <input class=" form-control" type="text" maxlength="64"
+                                                                  v-model="roleName">
+                                        <button class="btn btn-primary " type="button" @click="search();"><i
+                                                class="fa fa-search"></i>&nbsp;查询
+                                        </button>
+                                        <button class="btn btn-primary" type="button" @click="reset();"><i
+                                                class="fa fa-search"></i>&nbsp;重置
+                                        </button>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12" id="pull-left">
+                                    <div class="pull-left">
+                                        <button class="btn btn-primary " type="button" @click="initAdd();"><i
+                                                class="fa fa-plus-square"></i>&nbsp;添加
+                                        </button>
+                                        <button class="btn btn-primary " type="button" @click="deleteAll();"><i
+                                                class="fa fa-times-circle"></i>&nbsp;删除
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <table
+                                    class="table table-striped table-bordered table-hover dataTables-example dataTable"
+                                    id="DataTables_Table_0"
+                                    aria-describedby="DataTables_Table_0_info" role="grid">
+                                <thead>
+                                <tr role="row">
+                                    <th tabindex="0" width="50px;">
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input class="checkbox checkbox-success" id="all" type="checkbox"
+                                                   :checked="allCheck" @click="checkAll();">
+
+                                            <label for="all"> </label>
+                                        </div>
+                                    </th>
+                                    <th>角色名称</th>
+                                    <th>英文名称</th>
+                                    <th>归属机构</th>
+                                    <th>是否可用</th>
+                                    <th>备注信息</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="gradeA odd" role="row" v-for="(item,index) in list">
+                                    <td>
+                                        <div class="checkbox checkbox-success checkbox-inline"
+                                             v-if="item.enname!='sys'">
+                                            <input type="checkbox" id="'child' + index" :value="item.id"
+                                                   @click="selectedItem(item)"
+                                                   :checked="item.ischecked" class="checkbox checkbox-success">
+                                            <label for="'child' + index"> </label>
+                                        </div>
+
+                                    </td>
+
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.enname}}</td>
+                                    <td>{{item.officeName}}</td>
+                                    <td>{{item.useable==1?'是':'否'}}</td>
+                                    <td>{{item.remarks}}</td>
+                                    <td>
+                                        <div class="btn-group" v-if="item.enname!='sys'">
+                                            <button class="btn-white btn" type="button" title="修改"
+                                                    @click="initUpdate(item.id)"><i class="fa fa-edit text-navy"></i>
+                                            </button>
+                                            <button class="btn-white btn" type="button" title="删除"
+                                                    @click="deleteItem(item.id)"><i class="fa fa-remove text-navy"></i>
+                                            </button>
+
+                                        </div>
+
+                                        <div class="btn-group" v-if="item.enname!='sys'">
+                                            <button @click="initRole(item)" class="btn-white btn" data-toggle="modal"
+                                                    data-target="#permission" title="权限设备"><i
+                                                    class="fa fa-gear text-navy"></i></button>
+                                            <!--
+                                            <button @click="initUser(item)" class="btn-white btn" ><i class="fa fa-gears text-navy"></i></button>
+                                             -->
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <pageination :total="page.total" :size="page.size"
+                                         :page="page.curPage" :changge="pageFn"></pageination>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-		
+
+
+    <!-- add -->
+
+    <div class="row" v-show="!showList">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins panel panel-primary">
+                <div class="ibox-title panel-heading">
+                    <h5>{{actionName}}角色</h5>
+                </div>
+                <div class="ibox-content panel-body">
+                    <form id="form" method="get" class="form-horizontal"
+                          data-parsley-validate="" onsubmit="return false">
+                        <input type="hidden" name="id" v-model="roleVO.id"/>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font color="red">*</font>角色名称：</label>
+
+                            <div class="col-sm-4">
+                                <input name="name" v-model="roleVO.name" type="text"
+                                       class="form-control" maxlength="30"
+                                       data-parsley-length="[2, 30]"
+                                       data-parsley-length-message="角色名称在2-30个字符之间" required=""
+                                       data-parsley-required-message="角色名称 为必填字段">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font color="red">*</font>英文名称：</label>
+
+                            <div class="col-sm-4">
+                                <input name="enname" v-model="roleVO.enname" type="text"
+                                       class="form-control" data-parsley-length="[2, 30]"
+                                       data-parsley-length-message="英文名称在2-30个字符之间"
+                                       data-parsley-required="true"
+                                       data-parsley-required-message="英文名称为必填字段"
+                                       data-parsley-pattern=^[A-Za-z]+$
+                                       data-parsley-pattern-message="英文名称必须为字母"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font color="red">*</font>是否可用：</label>
+
+                            <div class="col-sm-4">
+
+                                <select name="type" v-model="roleVO.useable" class="form-control m-b" required=""
+                                        data-parsley-required-message="是否可用为必填字段">
+
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注信息：</label>
+
+                            <div class="col-sm-4">
+                                <input name="remarks" v-model="roleVO.remarks" type="text"
+                                       class="form-control" maxlength="100"
+                                       data-parsley-length="[0, 100]"
+                                       data-parsley-length-message="备注信息最大长度为100个字符"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+
+                                <button class="btn btn-primary" type="submit" @click="save();">保存</button>
+                                <button class="btn btn-white btn-pad" type="button" @click="cancle();">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add menus -->
+    <div class="modal inmodal" id="permission" tabindex="-1" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">分配权限</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" v-model="roleId"/>
+                    <div id="ztree" class="ztree"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white btn-pad" data-dismiss="modal">关闭</button>
+
+                    <button type="button" @click="saveMenus();" class="btn btn-primary">确定</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
 

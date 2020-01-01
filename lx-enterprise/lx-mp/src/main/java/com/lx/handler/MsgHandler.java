@@ -37,11 +37,11 @@ public class MsgHandler extends AbstractHandler {
         //当用户输入关键词如“你好”，“客服”等，并且有客服在线时，把消息转发给在线客服
         try {
             if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服")
-                && weixinService.getKefuService().kfOnlineList()
-                .getKfOnlineList().size() > 0) {
+                    && weixinService.getKefuService().kfOnlineList()
+                    .getKfOnlineList().size() > 0) {
                 return WxMpXmlOutMessage.TRANSFER_CUSTOMER_SERVICE()
-                    .fromUser(wxMessage.getToUser())
-                    .toUser(wxMessage.getFromUser()).build();
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser()).build();
             }
         } catch (WxErrorException e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class MsgHandler extends AbstractHandler {
         //TODO 组装回复消息
         String content = "收到信息内容：" + JsonUtils.toJson(wxMessage);
 
-        if(wxMessage.getContent().equals("sb")) {
+        if (wxMessage.getContent().equals("sb")) {
 
             List<WxMpXmlOutNewsMessage.Item> list = Lists.newArrayList();
 
@@ -70,12 +70,12 @@ public class MsgHandler extends AbstractHandler {
             list.add(item1);
 
 
-            WxMpXmlOutMessage wxMpXmlOutMessage =  new NewsBuilder().build(list, wxMessage, weixinService);
+            WxMpXmlOutMessage wxMpXmlOutMessage = new NewsBuilder().build(list, wxMessage, weixinService);
             return wxMpXmlOutMessage;
-        }else if(wxMessage.getContent().equals("img")){
+        } else if (wxMessage.getContent().equals("img")) {
 
             return new ImageBuilder().build("gyOZ4p8HVAcSPTYl2WMA6Xi8EI21UBKoYuri3f3CvsU", wxMessage, weixinService);
-        }else{
+        } else {
             return new TextBuilder().build(content, wxMessage, weixinService);
         }
 

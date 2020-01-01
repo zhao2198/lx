@@ -54,7 +54,7 @@ public class BookController {
     @GetMapping("/feign")
     public ResponseEntity testFeign() {
         ApiResponse<UserVO> response = userClient.getUser(1l);
-        if(response.isOk()) {
+        if (response.isOk()) {
             return new ApiResponse().ok(response.getData());
         }
         return new ApiResponse().error();

@@ -16,36 +16,36 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "/*")
 public class SecurityFilter implements Filter {
 
-	@Value("${lx.api.url.sso}")
-	private String ssoUrl;
-	@Value("${lx.api.url.ngt}")
-	private String ngtUrl;
+    @Value("${lx.api.url.sso}")
+    private String ssoUrl;
+    @Value("${lx.api.url.ngt}")
+    private String ngtUrl;
 
-	@Override
-	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		// GreenUrlSet.add("/");
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {
+        // TODO Auto-generated method stub
+        // GreenUrlSet.add("/");
 
-	}
+    }
 
-	@Override
-	public void doFilter(ServletRequest servletRequest, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		HttpServletRequest request = (HttpServletRequest) servletRequest;
-		String uri = request.getRequestURI();
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        // TODO Auto-generated method stub
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String uri = request.getRequestURI();
 
-		log.debug("uri:" + uri);
+        log.debug("uri:" + uri);
 
-		request.setAttribute("ssoUrl", ssoUrl);
-		request.setAttribute("ngtUrl", ngtUrl);
+        request.setAttribute("ssoUrl", ssoUrl);
+        request.setAttribute("ngtUrl", ngtUrl);
 
-		filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response);
 
-	}
+    }
 
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void destroy() {
+        // TODO Auto-generated method stub
+    }
 
 }

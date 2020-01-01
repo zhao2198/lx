@@ -17,7 +17,6 @@
     <dependencies>
 
 
-
         <dependency>
             <groupId>com.lx</groupId>
             <artifactId>lx-sdk</artifactId>

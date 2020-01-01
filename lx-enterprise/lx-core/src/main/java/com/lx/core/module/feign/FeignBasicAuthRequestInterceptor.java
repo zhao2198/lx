@@ -7,10 +7,11 @@ import java.util.Collection;
 
 /**
  * Feign请求拦截器
+ *
  * @author yinjihuan
  * @create 2017-11-10 17:25
  **/
-public class FeignBasicAuthRequestInterceptor  implements RequestInterceptor {
+public class FeignBasicAuthRequestInterceptor implements RequestInterceptor {
 
     public FeignBasicAuthRequestInterceptor() {
 
@@ -18,7 +19,7 @@ public class FeignBasicAuthRequestInterceptor  implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-       // template.header("Authorization", template.headers());
+        // template.header("Authorization", template.headers());
 //        Map<String, String> attributes = RibbonFilterContextHolder.getCurrentContext().getAttributes();
 //        for (String key :  attributes.keySet()) {
 //            String value = attributes.get(key);
@@ -26,7 +27,7 @@ public class FeignBasicAuthRequestInterceptor  implements RequestInterceptor {
 //            template.header(key, value);
 //        }
 
-        Collection<String> strings = (Collection)template.headers().get("Authorization");
+        Collection<String> strings = (Collection) template.headers().get("Authorization");
         template.header("Authorization", strings);
         template.header("From-MicroService", new String[]{String.valueOf(true)});
         template.header("Client-Key", new String[]{"azRmgIXTuHr8jWc6"});

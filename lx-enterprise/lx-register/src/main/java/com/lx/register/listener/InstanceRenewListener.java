@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
 public class InstanceRenewListener implements ApplicationListener<EurekaInstanceRenewedEvent> {
     @Override
     public void onApplicationEvent(EurekaInstanceRenewedEvent event) {
-        log.info("心跳检测服务：{}" ,event.getInstanceInfo().getAppName());
+        log.info("心跳检测服务：{}", event.getInstanceInfo().getAppName());
     }
 }

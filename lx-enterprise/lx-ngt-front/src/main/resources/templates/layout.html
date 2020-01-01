@@ -1,220 +1,221 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head th:fragment="htmlhead">
+<head th:fragment="htmlhead">
     <meta charset="utf-8"></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-    <meta name="renderer" content="webkit" />
+    <meta name="renderer" content="webkit"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <meta name="description" content=""></meta>
     <meta name="author" content=""></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
-   	<title >能管在线</title>
-  <link rel="icon" th:href="@{/public/img/fav.png}">
-<link rel="shortcut icon" th:href="@{/public/img/fav.png}" />
-	
-	 <link th:href="@{/public/css/bootstrap.min.css}" rel="stylesheet">
+    <title>能管在线</title>
+    <link rel="icon" th:href="@{/public/img/fav.png}">
+    <link rel="shortcut icon" th:href="@{/public/img/fav.png}"/>
+
+    <link th:href="@{/public/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/public/font-awesome/css/font-awesome.css}" rel="stylesheet">
 
     <link th:href="@{/public/css/animate.css}" rel="stylesheet">
     <link th:href="@{/public/css/style.css}" rel="stylesheet">
-    
-     <link th:href="@{/public/css/iconfont.css}" rel="stylesheet">
-    
-     <link th:href="@{/public/css/plugins/dataTables/datatables.min.css}" rel="stylesheet">
-      <link th:href="@{/public/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
-       <link th:href="@{/public/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
-       <link th:href="@{/public/css/plugins/iCheck/awesome-bootstrap-checkbox.css}" rel="stylesheet">
-       
-       <link th:href="@{/public/css/plugins/loading/jquery.mloading.css}" rel="stylesheet">
-        <style type="text/css">
+
+    <link th:href="@{/public/css/iconfont.css}" rel="stylesheet">
+
+    <link th:href="@{/public/css/plugins/dataTables/datatables.min.css}" rel="stylesheet">
+    <link th:href="@{/public/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
+    <link th:href="@{/public/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
+    <link th:href="@{/public/css/plugins/iCheck/awesome-bootstrap-checkbox.css}" rel="stylesheet">
+
+    <link th:href="@{/public/css/plugins/loading/jquery.mloading.css}" rel="stylesheet">
+    <style type="text/css">
         [v-cloak] {
             display: none !important;
         }
     </style>
-	<!-- END PAGE LEVEL STYLES -->
+    <!-- END PAGE LEVEL STYLES -->
 
-	
-   
-	 <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
-	 <script type="text/javascript" th:src="@{/public/vendor/vue/polyfill.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/vendor/vue/polyfill.min.js}"></script>
     <script type="text/javascript" th:src="@{/public/vendor/vue/vue.min.js}"></script>
-     <script type="text/javascript" th:src="@{/public/vendor/axios/axios.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/vendor/axios/axios.min.js}"></script>
     <script type="text/javascript" th:src="@{/public/js/common/comm.js}"></script>
-     <script type="text/javascript" th:src="@{/public/js/common/hxPageUtil.js}"></script>
-      <script type="text/javascript" th:src="@{/public/js/common/hxCharts.js}"></script>
-     <script type="text/javascript" th:src="@{/public/js/common/hxAxiosPageUtil.js}"></script>
-      <script type="text/javascript" th:src="@{/public/vendor/page/pageination.js}"></script>
-     
-     <script type="text/javascript" th:src="@{/public/js/common/hxPaging.js}"></script>
-     
-     
-     <script type="text/javascript" th:src="@{/public/vendor/parsleyjs/parsley.js}"></script>
-     
-		<script type="text/javascript" th:src="@{/public/vendor/treegrid/jquery.treegrid.js}"></script>
-     
-	   <!-- Mainly scripts -->
-	<script th:src="@{/public/js/bootstrap.min.js}"></script>
-	<script  th:src="@{/public/plugins/metisMenu/jquery.metisMenu.js}"></script>
-	<script  th:src="@{/public/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
-	
-	<script  th:src="@{/public/plugins/toastr/toastr.min.js}"></script>
-	<script  th:src="@{/public/plugins/sweetalert/sweetalert.min.js}"></script>
-	<script th:src="@{/public/plugins/laydate/laydate1.js}"></script> <!-- 改成你的路径 -->
-	<!-- Custom and plugin javascript -->
-	<script th:src="@{/public/js/inspinia.js}"></script>
-	<script th:src="@{/public/plugins/pace/pace.min.js}"></script>
-	
-	<script type="text/javascript" th:src="@{/public/vendor/loading/jquery.mloading.js}"></script>
+    <script type="text/javascript" th:src="@{/public/js/common/hxPageUtil.js}"></script>
+    <script type="text/javascript" th:src="@{/public/js/common/hxCharts.js}"></script>
+    <script type="text/javascript" th:src="@{/public/js/common/hxAxiosPageUtil.js}"></script>
+    <script type="text/javascript" th:src="@{/public/vendor/page/pageination.js}"></script>
+
+    <script type="text/javascript" th:src="@{/public/js/common/hxPaging.js}"></script>
+
+
+    <script type="text/javascript" th:src="@{/public/vendor/parsleyjs/parsley.js}"></script>
+
+    <script type="text/javascript" th:src="@{/public/vendor/treegrid/jquery.treegrid.js}"></script>
+
+    <!-- Mainly scripts -->
+    <script th:src="@{/public/js/bootstrap.min.js}"></script>
+    <script th:src="@{/public/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/public/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+    <script th:src="@{/public/plugins/toastr/toastr.min.js}"></script>
+    <script th:src="@{/public/plugins/sweetalert/sweetalert.min.js}"></script>
+    <script th:src="@{/public/plugins/laydate/laydate1.js}"></script> <!-- 改成你的路径 -->
+    <!-- Custom and plugin javascript -->
+    <script th:src="@{/public/js/inspinia.js}"></script>
+    <script th:src="@{/public/plugins/pace/pace.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/public/vendor/loading/jquery.mloading.js}"></script>
     <script type="text/javascript" th:src="@{/public/js/qrcode.js}"></script>
-    
-    
-   
-  </head>
+
+
+</head>
 <body class="page-header-fixed  pace-done">
 <div th:replace="fragments/header :: header">Header</div>
 
 
-    <div th:fragment="navbar"  class="wrapper"  id="wrapper">
+<div th:fragment="navbar" class="wrapper" id="wrapper">
     <div th:replace="fragments/left :: left">left</div>
     <div id="page-wrapper" class="gray-bg">
-    	
-    	<!-- 
-    	<div th:replace="fragments/sidebar :: sidebar">sidebar</div>
-    	 -->
-		<div class="wrapper wrapper-content " layout:fragment="content" id="content">
-		</div>
-    	<div th:replace="fragments/footer :: footer">footer</div>
+
+        <!--
+        <div th:replace="fragments/sidebar :: sidebar">sidebar</div>
+         -->
+        <div class="wrapper wrapper-content " layout:fragment="content" id="content">
+        </div>
+        <div th:replace="fragments/footer :: footer">footer</div>
     </div>
-    </div>
-    
-    <script type="text/x-template" id="pageination">
-  <div>
-                    <div class="fixed-table-pagination" >
-                    <div class="pull-left pagination-detail"><span class="pagination-info">显示第{{(page - 1) * size + 1}} 到第{{(page * size < total)?page * size:total}} 条记录，总共{{total}} 条记录</span>
-                    <span class="page-list">每页显示 
-					 <select v-model="pageinationSize"  @change="pageSizeChange();"  class="input-sm">
+</div>
+
+<script type="text/x-template" id="pageination">
+    <div>
+        <div class="fixed-table-pagination">
+            <div class="pull-left pagination-detail"><span class="pagination-info">显示第{{(page - 1) * size + 1}} 到第{{(page * size < total)?page * size:total}} 条记录，总共{{total}} 条记录</span>
+                <span class="page-list">每页显示
+					 <select v-model="pageinationSize" @change="pageSizeChange();" class="input-sm">
 						<option v-for="item in [5,10,20,50,100]" :value="item">{{item}}</option>
 					</select>
-	
-                    </select>条</span>
-                    </div></div>
-    <div class="pageination_align">
 
-        <div class="pageination dataTables_paginate paging_simple_numbers" v-if="pageinationTotal">
-            <div @click="pageUp(0)" class="pagination_page" :class="startDisabled?'disabled':''">首页</div>
-            <div @click="pageUp(1)" class="pagination_page" :class="startDisabled?'disabled':''">上一页</div>
-            <div class="pagination_page" :class="item==pageinationCurrentPage?'pagination_page_active':''"
-                 v-for="item in pageinationLength" @click="jump(item)">
-                {{item}}
+                    </select>条</span>
             </div>
-            <div @click="pageDown(1)" class="pagination_page" :class="endDisabled?'disabled':''">下一页</div>
-            <div @click="pageDown(0)" class="pagination_page pagination_page_right" :class="endDisabled?'disabled':''">
-                尾页
+        </div>
+        <div class="pageination_align">
+
+            <div class="pageination dataTables_paginate paging_simple_numbers" v-if="pageinationTotal">
+                <div @click="pageUp(0)" class="pagination_page" :class="startDisabled?'disabled':''">首页</div>
+                <div @click="pageUp(1)" class="pagination_page" :class="startDisabled?'disabled':''">上一页</div>
+                <div class="pagination_page" :class="item==pageinationCurrentPage?'pagination_page_active':''"
+                     v-for="item in pageinationLength" @click="jump(item)">
+                    {{item}}
+                </div>
+                <div @click="pageDown(1)" class="pagination_page" :class="endDisabled?'disabled':''">下一页</div>
+                <div @click="pageDown(0)" class="pagination_page pagination_page_right"
+                     :class="endDisabled?'disabled':''">
+                    尾页
+                </div>
             </div>
         </div>
     </div>
-</div>
 </script>
-   
-	 <script type="text/javascript">
-	 
-	 if (!window.Promise) {
-		  window.Promise = Promise;
-	 }
-	 
-	 var curDay = '[[${#httpServletRequest.getAttribute("curDay")}]]'
-		 var firstDay = '[[${#httpServletRequest.getAttribute("firstDay")}]]'
-      
-      var baseUrl = '[[${#servletContext.contextPath}]]';
-      var ssoUrl = '[[${#httpServletRequest.getAttribute("ssoUrl")}]]';
-      var ngtUrl = '[[${#httpServletRequest.getAttribute("ngtUrl")}]]';
-      var centerUrl = '[[${#httpServletRequest.getAttribute("centerUrl")}]]';
-      var domain = '[[${#httpServletRequest.getAttribute("domain")}]]';
-      
-      var socket = '[[${#httpServletRequest.getAttribute("socket")}]]';
-     // var contextPath = $('#contextPath').attr('href');//获取应用的根目录，我的绝对路径是http://localhost:80/
-      
-     
-      
-      var hx = new hxAxiosPageUtil();
-      hx.token = getCookie("NGT_TOKEN");
-      hx.ssoUrl = ssoUrl;
-      hx.baseUrl = ssoUrl;
-      hx.ngtUrl = ngtUrl;
-      hx.domain = domain;
-      hx.ctx = baseUrl;
-      hx.init();
-      
-      /*
-      if(hx.token != '') {
-    	  hx.getJson('user/token/' + hx.token,{},function(result){
-	   			hx.curUser = result.data;
-	   		 });
-      }else{
-    	  window.open(hx.ctx + "/login", '_self');
-      }
-      */
-      
-      hx.baseUrl = ngtUrl + hx.prefix;
-      
-      var hxBack = new hxAxiosPageUtil();
-      hxBack.baseUrl = baseUrl + "/";
-      
-      
-      var attime;
-      function clock(){
-    	  var time = new Date();//获取系统当前时间
-    	  var year = time.getFullYear();
-    	  var month = time.getMonth()+1;
-    	  var date= time.getDate();//系统时间月份中的日
-    	  var day = time.getDay();//系统时间中的星期值
-    	  var weeks = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
-    	  var week = weeks[day];//显示为星期几
-    	  var hour = time.getHours();
-    	  var minutes = time.getMinutes();
-    	  var seconds = time.getSeconds();
-    	  if(month<10){
-    	  month = "0"+month; 
-    	  }
-    	  if(date<10){
-    	  date = "0"+date; 
-    	  }
-    	  if(hour<10){
-    	  hour = "0"+hour; 
-    	  }
-    	  if(minutes<10){
-    	  minutes = "0"+minutes; 
-    	  }
-    	  if(seconds<10){
-    	  seconds = "0"+seconds; 
-    	  }
-    	 attime = year+"年"+month+"月"+date+"日"+week+hour+":"+minutes+":"+seconds;
+
+<script type="text/javascript">
+
+    if (!window.Promise) {
+        window.Promise = Promise;
+    }
+
+    var curDay = '[[${#httpServletRequest.getAttribute("curDay")}]]'
+    var firstDay = '[[${#httpServletRequest.getAttribute("firstDay")}]]'
+
+    var baseUrl = '[[${#servletContext.contextPath}]]';
+    var ssoUrl = '[[${#httpServletRequest.getAttribute("ssoUrl")}]]';
+    var ngtUrl = '[[${#httpServletRequest.getAttribute("ngtUrl")}]]';
+    var centerUrl = '[[${#httpServletRequest.getAttribute("centerUrl")}]]';
+    var domain = '[[${#httpServletRequest.getAttribute("domain")}]]';
+
+    var socket = '[[${#httpServletRequest.getAttribute("socket")}]]';
+    // var contextPath = $('#contextPath').attr('href');//获取应用的根目录，我的绝对路径是http://localhost:80/
+
+
+    var hx = new hxAxiosPageUtil();
+    hx.token = getCookie("NGT_TOKEN");
+    hx.ssoUrl = ssoUrl;
+    hx.baseUrl = ssoUrl;
+    hx.ngtUrl = ngtUrl;
+    hx.domain = domain;
+    hx.ctx = baseUrl;
+    hx.init();
+
+    /*
+    if(hx.token != '') {
+        hx.getJson('user/token/' + hx.token,{},function(result){
+                 hx.curUser = result.data;
+              });
+    }else{
+        window.open(hx.ctx + "/login", '_self');
+    }
+    */
+
+    hx.baseUrl = ngtUrl + hx.prefix;
+
+    var hxBack = new hxAxiosPageUtil();
+    hxBack.baseUrl = baseUrl + "/";
+
+
+    var attime;
+
+    function clock() {
+        var time = new Date();//获取系统当前时间
+        var year = time.getFullYear();
+        var month = time.getMonth() + 1;
+        var date = time.getDate();//系统时间月份中的日
+        var day = time.getDay();//系统时间中的星期值
+        var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var week = weeks[day];//显示为星期几
+        var hour = time.getHours();
+        var minutes = time.getMinutes();
+        var seconds = time.getSeconds();
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (date < 10) {
+            date = "0" + date;
+        }
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        attime = year + "年" + month + "月" + date + "日" + week + hour + ":" + minutes + ":" + seconds;
         $("#clock").html(attime);
-        
-      }
-      setInterval(clock,1000);
-      
-      /**权限指令**/
-      Vue.directive('has', {
-        bind: function(el, binding) {
-          if (!Vue.prototype.$_has(binding.value)) {
-            el.parentNode.removeChild(el);
-          }
+
+    }
+
+    setInterval(clock, 1000);
+
+    /**权限指令**/
+    Vue.directive('has', {
+        bind: function (el, binding) {
+            if (!Vue.prototype.$_has(binding.value)) {
+                el.parentNode.removeChild(el);
+            }
         }
-      });
-      //权限检查方法
-      Vue.prototype.$_has = function(value) {
-        
-        var isExist=false;
-        if(hx.left.curPermissions.toString().indexOf(value) != -1) {
-        	isExist = true;
+    });
+    //权限检查方法
+    Vue.prototype.$_has = function (value) {
+
+        var isExist = false;
+        if (hx.left.curPermissions.toString().indexOf(value) != -1) {
+            isExist = true;
         }
-        
+
         return isExist;
-      };
-      
-      </script>
-      <script type="text/javascript" th:src="@{/public/js/sys/left.js}"></script>
-       <script type="text/javascript" th:src="@{/public/js/sys/header.js}"></script>
+    };
+
+</script>
+<script type="text/javascript" th:src="@{/public/js/sys/left.js}"></script>
+<script type="text/javascript" th:src="@{/public/js/sys/header.js}"></script>
 </body>
 </html>

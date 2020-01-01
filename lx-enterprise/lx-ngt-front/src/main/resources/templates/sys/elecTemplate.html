@@ -4,760 +4,869 @@
 
 </head>
 <body>
-	<div  class="wrapper wrapper-content" id="ngt" v-cloak>
-		<div class="row" v-show="showList">
-			<div class="col-md-12">
-				<div class="ibox">
-					<div class="ibox-title">
-						<h5>电费模板列表</h5>
-					</div>
-					<div class="ibox-content">
-						<div class="table-responsive">
-							<div id="DataTables_Table_0_wrapper"
-								class="dataTables_wrapper form-inline dt-bootstrap">
+<div class="wrapper wrapper-content" id="ngt" v-cloak>
+    <div class="row" v-show="showList">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>电费模板列表</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <div id="DataTables_Table_0_wrapper"
+                             class="dataTables_wrapper form-inline dt-bootstrap">
 
-								<div class="row">
-									<div class="col-md-12">
-										<div class="ibox">
-											<span>模板名称：</span> <input class=" form-control" type="text" maxlength="64" v-model="templateName" >
-											<button class="btn btn-primary " type="button" @click="search();"><i class="fa fa-search"></i>&nbsp;查询</button>
-										</div>
-									</div>
-								</div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ibox">
+                                        <span>模板名称：</span> <input class=" form-control" type="text" maxlength="64"
+                                                                  v-model="templateName">
+                                        <button class="btn btn-primary " type="button" @click="search();"><i
+                                                class="fa fa-search"></i>&nbsp;查询
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
-								<div class="row">
-									<div class="col-md-12" id="pull-left">
-										<div class="pull-left">
-											<button class="btn btn-primary " type="button" @click="initAdd();"><i class="fa fa-plus-square"></i>&nbsp;添加</button>
-											<button class="btn btn-primary " type="button" @click="initTransformerAdd();"><i class="fa fa-cog"></i>&nbsp;变压器参数配置</button>
-											<!-- <button class="btn btn-primary " type="button" @click="deleteAll();"><i class="fa fa-times-circle"></i>&nbsp;删除</button> -->
+                            <div class="row">
+                                <div class="col-md-12" id="pull-left">
+                                    <div class="pull-left">
+                                        <button class="btn btn-primary " type="button" @click="initAdd();"><i
+                                                class="fa fa-plus-square"></i>&nbsp;添加
+                                        </button>
+                                        <button class="btn btn-primary " type="button" @click="initTransformerAdd();"><i
+                                                class="fa fa-cog"></i>&nbsp;变压器参数配置
+                                        </button>
+                                        <!-- <button class="btn btn-primary " type="button" @click="deleteAll();"><i class="fa fa-times-circle"></i>&nbsp;删除</button> -->
 
-										</div>
-									</div>
-								</div>
-								<table
-									class="table table-striped table-bordered table-hover dataTables-example dataTable"
-									id="DataTables_Table_0"
-									aria-describedby="DataTables_Table_0_info" role="grid">
-									<thead >
-										<tr role="row">
-											<!-- <th tabindex="0"><input type="checkbox" value="" @click="checkAll();">全选/反选</th> -->
-											<th >变压器名称</th>
-											<th >模板编号</th>
-											<th>模板名称</th>
-											<th width="100">操作</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="gradeA odd" role="row" v-for="(item,index) in list">
-											<!-- <td><input type="checkbox" :value="item.id" @click="selectedItem(item)" :checked="item.ischecked"></td> -->
-											<td>{{ item.equipmentName }}</td>
-											<td>{{ item.templateCode }}</td>
-											<td>{{ item.templateName }}</td>
-											<td>
-												<div class="btn-group">
-													<button @click="initUpdate(item.id)" class="btn-white btn" title="修改"><i class="fa fa-edit text-navy"></i></button>
-													<button @click="deleteById(item)" class="btn-white btn" title="删除" ><i class="fa fa-remove text-navy"></i></button>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<pageination :total="page.total" :size="page.size"
-									:page="page.curPage" :changge="pageFn"></pageination>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- add and update-->
-		<div class="row" v-show="showTemplate">
-			<div class="col-md-12">
-				<div class="ibox float-e-margins panel panel-primary">
-					<div class="ibox-title panel-heading">
-						<h5>电价模板设置</h5>
-					</div>
-					<div class="ibox-content panel-body">
-						<form id="form" method="get" class="form-horizontal"
-							data-parsley-validate="" onsubmit="return false">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="col-md-6">
-                                   		<div class="form-group">
-                                   			<label class="col-md-4 control-label"><font color="red">*</font>变压器：</label>
-                                   			<div class="col-md-8">
-                                   				<input type="hidden" name = "id" v-model="elecTemplateVO.id"/>
-                                   				<!-- <input type="hidden" name="equipmentId" v-model="elecTemplateVO.equipmentId"/> -->
-                                   				<select name="equipmentId" v-model="elecTemplateVO.equipmentId"
-													class="form-control m-b"
-													data-parsley-required-message="变压器名称为必选字段" data-parsley-required="true">
-													
-													<option value="">--请选择--</option>
-													<option v-for="item in transformerList" :value="item.id">{{item.name}}</option>
-												</select>
-                                   			</div>
-                                   		</div>
-                                   	</div>
-                                   	<div class="col-md-6">
-                                   		<div class="form-group">
-                                   			<label class="col-md-4 control-label"><font color="red">*</font>模板编号：</label>
-                                   			<div class="col-md-8">
-                                   				<input name="templateCode" v-model="elecTemplateVO.templateCode" type="text"
-														class="form-control" maxlength="50"
-														data-parsley-length="[2, 50]"
-														data-parsley-required="true"
-														data-parsley-length-message="模板编号在2-50个字符之间" 
-														data-parsley-required-message="模板编号为必填字段" />
-                                   			</div>
-                                   		</div>
-                                   	</div>
-								</div>
-				            </div>
-				            <div class="row">
-				            	<div class="col-md-6">
-				            			<div class="form-group">
-                                   			<label class="col-md-2 control-label"><font color="red">*</font>模板名称：</label>
-                                   			<div class="col-md-10">
-                                   				<input name="templateName" v-model="elecTemplateVO.templateName" type="text"
-														class="form-control" maxlength="50"
-														data-parsley-length="[2, 50]"
-														data-parsley-length-message="模板名称在2-50个字符之间" required=""
-														data-parsley-required-message="模板名称为必填字段" />
-                                   			</div>
-                                		</div>
-				            	</div>
-				            </div>
-							<div class="row">
-								<div class="col-md-12">
-				                    <div class="tabs-container">
-				                        <ul class="nav nav-tabs">
-				                            <li class="active"><a data-toggle="tab" href="tabs.html#powerCost">电度电价</a></li>
-				                            <li class=""><a data-toggle="tab" href="tabs.html#basicCost">基本电价</a></li>
-				                            <li class=""><a data-toggle="tab" href="tabs.html#forceCost">力调电价</a></li>
-				                        </ul>
-				                        <div class="tab-content">
-				                            <!-- 电度电价模板 -->
-				                            <div id="powerCost" class="tab-pane active">
-				                                <div class="panel-body">
-				                                    <div class="row">
-				                                    	<div class="col-md-3">
-				                                    		
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label"><font color="red">*</font>电价类型：</label>
-				                                    			<!-- <label class="radio radio-success radio-inline"> 
-				                                    				<input type="radio"  :checked="showPowerPriceOnly" value="0" @click="radioChange()"  name="priceType"><label>单一 </label>
-                                            					</label> -->  <!--暂时屏蔽  王晓超 2018年8月11日15:48:51  -->
-                                            					<label class="radio radio-success radio-inline"> 
-				                                    				<input type="radio"  :checked="!showPowerPriceOnly" value="1"  @click="radioChange()" name="priceType"><label>自定义</label>
-                                            					</label>
-				                                    		</div>
-				                                    	</div>
-				                                    	<div class="col-md-9">
-				                                    		<div class="form-group">
-				                                    			<!-- <label class="col-md-2 control-label">是否启用阶梯电价：</label>
-				                                    			<div class="switch  col-md-10 radio-inline">
-				                                    				<div class="onoffswitch" title="此功能暂未开放">
-									                                    <input type="checkbox" :checked="showPowerPriceLadder" disabled="disabled"  v-model="showPowerPriceLadder" class="onoffswitch-checkbox" id="example1">
-									                                    <label class="onoffswitch-label" for="example1">
-									                                        <span class="onoffswitch-inner"></span>
-									                                        <span class="onoffswitch-switch"></span>
-									                                    </label>
-							                               		 	</div>
-				                                    			</div> -->
-				                                    			
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <!-- 单一电价输入 -->
-				                                    <div class="row" v-show="showPowerPriceOnly">
-				                                    	<div class="col-md-3">
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label"></label>
-				                                    			<div class="col-md-8">
-					                                    			<input name="name" v-model="powerPrice.value" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"
-																				data-parsley-length-message="单一电价在0-10个字符之间"
-																				 />
-				                                    			</div>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <!--自定义电价输入  -->
-				                                    <div class="row" v-show="!showPowerPriceOnly">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-4 control-label">尖：</label>
-				                                    			<div class="col-md-8 input-group" > 
-				                                    				<input name="name" v-model="powerPrice.sharpPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[1,10]"
-																				data-parsley-required="true"
-																				data-parsley-length-message="尖电价在1-10个字符之间"
-																				data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
-           																		data-parsley-pattern-message="必须为数字"
-																				data-parsley-required-message="尖电价不能为空" /><span class="input-group-addon" >元/kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="input-group">
-				                                    			<input id="timesId" name="name" v-model="sharpTimes" type="text"
-																				class="form-control"
-																				placeholder="请选择时间段"
-																				readonly="readonly"
-																				data-parsley-required-message="时间段不能为空" />
-																<span class="input-group-btn">
-																	<button id="choseTimes" @click="choseTimes('sharp');" type="button" class="btn btn-primary" data-toggle="modal" data-target="#timesDiv">
+                                    </div>
+                                </div>
+                            </div>
+                            <table
+                                    class="table table-striped table-bordered table-hover dataTables-example dataTable"
+                                    id="DataTables_Table_0"
+                                    aria-describedby="DataTables_Table_0_info" role="grid">
+                                <thead>
+                                <tr role="row">
+                                    <!-- <th tabindex="0"><input type="checkbox" value="" @click="checkAll();">全选/反选</th> -->
+                                    <th>变压器名称</th>
+                                    <th>模板编号</th>
+                                    <th>模板名称</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="gradeA odd" role="row" v-for="(item,index) in list">
+                                    <!-- <td><input type="checkbox" :value="item.id" @click="selectedItem(item)" :checked="item.ischecked"></td> -->
+                                    <td>{{ item.equipmentName }}</td>
+                                    <td>{{ item.templateCode }}</td>
+                                    <td>{{ item.templateName }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button @click="initUpdate(item.id)" class="btn-white btn" title="修改"><i
+                                                    class="fa fa-edit text-navy"></i></button>
+                                            <button @click="deleteById(item)" class="btn-white btn" title="删除"><i
+                                                    class="fa fa-remove text-navy"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <pageination :total="page.total" :size="page.size"
+                                         :page="page.curPage" :changge="pageFn"></pageination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add and update-->
+    <div class="row" v-show="showTemplate">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins panel panel-primary">
+                <div class="ibox-title panel-heading">
+                    <h5>电价模板设置</h5>
+                </div>
+                <div class="ibox-content panel-body">
+                    <form id="form" method="get" class="form-horizontal"
+                          data-parsley-validate="" onsubmit="return false">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label"><font color="red">*</font>变压器：</label>
+                                        <div class="col-md-8">
+                                            <input type="hidden" name="id" v-model="elecTemplateVO.id"/>
+                                            <!-- <input type="hidden" name="equipmentId" v-model="elecTemplateVO.equipmentId"/> -->
+                                            <select name="equipmentId" v-model="elecTemplateVO.equipmentId"
+                                                    class="form-control m-b"
+                                                    data-parsley-required-message="变压器名称为必选字段"
+                                                    data-parsley-required="true">
+
+                                                <option value="">--请选择--</option>
+                                                <option v-for="item in transformerList" :value="item.id">{{item.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label"><font color="red">*</font>模板编号：</label>
+                                        <div class="col-md-8">
+                                            <input name="templateCode" v-model="elecTemplateVO.templateCode" type="text"
+                                                   class="form-control" maxlength="50"
+                                                   data-parsley-length="[2, 50]"
+                                                   data-parsley-required="true"
+                                                   data-parsley-length-message="模板编号在2-50个字符之间"
+                                                   data-parsley-required-message="模板编号为必填字段"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label"><font color="red">*</font>模板名称：</label>
+                                    <div class="col-md-10">
+                                        <input name="templateName" v-model="elecTemplateVO.templateName" type="text"
+                                               class="form-control" maxlength="50"
+                                               data-parsley-length="[2, 50]"
+                                               data-parsley-length-message="模板名称在2-50个字符之间" required=""
+                                               data-parsley-required-message="模板名称为必填字段"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="tabs.html#powerCost">电度电价</a></li>
+                                        <li class=""><a data-toggle="tab" href="tabs.html#basicCost">基本电价</a></li>
+                                        <li class=""><a data-toggle="tab" href="tabs.html#forceCost">力调电价</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <!-- 电度电价模板 -->
+                                        <div id="powerCost" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label"><font
+                                                                    color="red">*</font>电价类型：</label>
+                                                            <!-- <label class="radio radio-success radio-inline">
+                                                                <input type="radio"  :checked="showPowerPriceOnly" value="0" @click="radioChange()"  name="priceType"><label>单一 </label>
+                                                            </label> -->  <!--暂时屏蔽  王晓超 2018年8月11日15:48:51  -->
+                                                            <label class="radio radio-success radio-inline">
+                                                                <input type="radio" :checked="!showPowerPriceOnly"
+                                                                       value="1" @click="radioChange()"
+                                                                       name="priceType"><label>自定义</label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="form-group">
+                                                            <!-- <label class="col-md-2 control-label">是否启用阶梯电价：</label>
+                                                            <div class="switch  col-md-10 radio-inline">
+                                                                <div class="onoffswitch" title="此功能暂未开放">
+                                                                    <input type="checkbox" :checked="showPowerPriceLadder" disabled="disabled"  v-model="showPowerPriceLadder" class="onoffswitch-checkbox" id="example1">
+                                                                    <label class="onoffswitch-label" for="example1">
+                                                                        <span class="onoffswitch-inner"></span>
+                                                                        <span class="onoffswitch-switch"></span>
+                                                                    </label>
+                                                                    </div>
+                                                            </div> -->
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 单一电价输入 -->
+                                                <div class="row" v-show="showPowerPriceOnly">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label"></label>
+                                                            <div class="col-md-8">
+                                                                <input name="name" v-model="powerPrice.value"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"
+                                                                       data-parsley-length-message="单一电价在0-10个字符之间"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--自定义电价输入  -->
+                                                <div class="row" v-show="!showPowerPriceOnly">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">尖：</label>
+                                                            <div class="col-md-8 input-group">
+                                                                <input name="name" v-model="powerPrice.sharpPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[1,10]"
+                                                                       data-parsley-required="true"
+                                                                       data-parsley-length-message="尖电价在1-10个字符之间"
+                                                                       data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
+                                                                       data-parsley-pattern-message="必须为数字"
+                                                                       data-parsley-required-message="尖电价不能为空"/><span
+                                                                    class="input-group-addon">元/kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <input id="timesId" name="name" v-model="sharpTimes"
+                                                                   type="text"
+                                                                   class="form-control"
+                                                                   placeholder="请选择时间段"
+                                                                   readonly="readonly"
+                                                                   data-parsley-required-message="时间段不能为空"/>
+                                                            <span class="input-group-btn">
+																	<button id="choseTimes"
+                                                                            @click="choseTimes('sharp');" type="button"
+                                                                            class="btn btn-primary" data-toggle="modal"
+                                                                            data-target="#timesDiv">
 																		选择
 																	</button>
 																</span>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <div class="row" v-show="!showPowerPriceOnly">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-4 control-label">峰：</label>
-				                                    			<div class="col-md-8 input-group" > 
-				                                    				<input name="name" v-model="powerPrice.peakPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[1,10]"
-																				data-parsley-length-message="峰电价在1-10个字符之间"
-																				data-parsley-required="true"
-																				data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
-           																		data-parsley-pattern-message="必须为数字"
-																				data-parsley-required-message="峰电价不能为空" /><span class="input-group-addon" >元/kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="input-group">
-				                                    			<input name="name" v-model="peakTimes" type="text"
-																				class="form-control"
-																				placeholder="请选择时间段"
-																				readonly="readonly"
-																				data-parsley-required-message="时间段不能为空" />
-																<span class="input-group-btn">
-																	<button id="choseTimes" @click="choseTimes('peak');" type="button" class="btn btn-primary" data-toggle="modal" data-target="#timesDiv">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showPowerPriceOnly">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">峰：</label>
+                                                            <div class="col-md-8 input-group">
+                                                                <input name="name" v-model="powerPrice.peakPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[1,10]"
+                                                                       data-parsley-length-message="峰电价在1-10个字符之间"
+                                                                       data-parsley-required="true"
+                                                                       data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
+                                                                       data-parsley-pattern-message="必须为数字"
+                                                                       data-parsley-required-message="峰电价不能为空"/><span
+                                                                    class="input-group-addon">元/kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <input name="name" v-model="peakTimes" type="text"
+                                                                   class="form-control"
+                                                                   placeholder="请选择时间段"
+                                                                   readonly="readonly"
+                                                                   data-parsley-required-message="时间段不能为空"/>
+                                                            <span class="input-group-btn">
+																	<button id="choseTimes" @click="choseTimes('peak');"
+                                                                            type="button" class="btn btn-primary"
+                                                                            data-toggle="modal" data-target="#timesDiv">
 																		选择
 																	</button>
 																</span>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <div class="row" v-show="!showPowerPriceOnly">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-4 control-label">平：</label>
-				                                    			<div class="col-md-8 input-group" > 
-				                                    				<input name="name" v-model="powerPrice.flatPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[1,10]"
-																				data-parsley-required="true"
-																				data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
-           																		data-parsley-pattern-message="必须为数字"
-																				data-parsley-length-message="平电价在1-10个字符之间"
-																				data-parsley-required-message="平电价不能为空" /><span class="input-group-addon" >元/kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="input-group">
-				                                    			<input name="name" v-model="flatTimes" type="text"
-																				class="form-control" 
-																				placeholder="请选择时间段"
-																				readonly="readonly"
-																				data-parsley-required-message="时间段不能为空" />
-																<span class="input-group-btn">
-																	<button id="choseTimes" @click="choseTimes('flat');" type="button" class="btn btn-primary" data-toggle="modal" data-target="#timesDiv">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showPowerPriceOnly">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">平：</label>
+                                                            <div class="col-md-8 input-group">
+                                                                <input name="name" v-model="powerPrice.flatPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[1,10]"
+                                                                       data-parsley-required="true"
+                                                                       data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
+                                                                       data-parsley-pattern-message="必须为数字"
+                                                                       data-parsley-length-message="平电价在1-10个字符之间"
+                                                                       data-parsley-required-message="平电价不能为空"/><span
+                                                                    class="input-group-addon">元/kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <input name="name" v-model="flatTimes" type="text"
+                                                                   class="form-control"
+                                                                   placeholder="请选择时间段"
+                                                                   readonly="readonly"
+                                                                   data-parsley-required-message="时间段不能为空"/>
+                                                            <span class="input-group-btn">
+																	<button id="choseTimes" @click="choseTimes('flat');"
+                                                                            type="button" class="btn btn-primary"
+                                                                            data-toggle="modal" data-target="#timesDiv">
 																		选择
 																	</button>
 																</span>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <div class="row" v-show="!showPowerPriceOnly">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-4 control-label">谷：</label>
-				                                    			<div class="col-md-8 input-group" > 
-				                                    				<input name="name" v-model="powerPrice.valleyPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[1,10]"
-																				data-parsley-required="true"
-																				data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
-           																		data-parsley-pattern-message="必须为数字"
-																				data-parsley-length-message="谷电价在1-10个字符之间"
-																				data-parsley-required-message="谷电价不能为空" /><span class="input-group-addon" >元/kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="input-group">
-				                                    			<input name="name" v-model="valleyTimes" type="text"
-																				class="form-control"
-																				placeholder="请选择时间段"
-																				readonly="readonly"
-																				data-parsley-required-message="时间段不能为空" />
-																<span class="input-group-btn">
-																	<button id="choseTimes" @click="choseTimes('valley');" type="button" class="btn btn-primary" data-toggle="modal" data-target="#timesDiv">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showPowerPriceOnly">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">谷：</label>
+                                                            <div class="col-md-8 input-group">
+                                                                <input name="name" v-model="powerPrice.valleyPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[1,10]"
+                                                                       data-parsley-required="true"
+                                                                       data-parsley-pattern="^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$"
+                                                                       data-parsley-pattern-message="必须为数字"
+                                                                       data-parsley-length-message="谷电价在1-10个字符之间"
+                                                                       data-parsley-required-message="谷电价不能为空"/><span
+                                                                    class="input-group-addon">元/kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <input name="name" v-model="valleyTimes" type="text"
+                                                                   class="form-control"
+                                                                   placeholder="请选择时间段"
+                                                                   readonly="readonly"
+                                                                   data-parsley-required-message="时间段不能为空"/>
+                                                            <span class="input-group-btn">
+																	<button id="choseTimes"
+                                                                            @click="choseTimes('valley');" type="button"
+                                                                            class="btn btn-primary" data-toggle="modal"
+                                                                            data-target="#timesDiv">
 																		选择
 																	</button>
 																</span>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <!-- 自定义电价输入结束，阶梯电价开始 -->
-				                                    <div class="row" v-show="showPowerPriceLadder">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-3 control-label">第一阶梯：</label>
-				                                    			<div class="col-md-4" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.firstStart" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.firstEnd" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label">递增电价：</label>
-				                                    			<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.firstLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">元</span>
-	                                           					</div>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <div class="row" v-show="showPowerPriceLadder">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-3 control-label">第二阶梯：</label>
-				                                    			<div class="col-md-4" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.secondStart" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.secondEnd" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label">递增电价：</label>
-				                                    			<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.secondLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">元</span>
-	                                           					</div>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <div class="row" v-show="showPowerPriceLadder">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-3 control-label">第三阶梯：</label>
-				                                    			<div class="col-md-4" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.thirdStart" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.thirdEnd" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label">递增电价：</label>
-				                                    			<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.thirdLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">元</span>
-	                                           					</div>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <div class="row" v-show="showPowerPriceLadder">
-				                                    	<div class="col-md-3">
-			                                    			<div class="form-group">
-			                                    				<label class="col-md-3 control-label">第四阶梯：</label>
-				                                    			<div class="col-md-4" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.fourthStart" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.fourthEnd" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				placeholder="∞"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">kWh</span>
-	                                           					</div>
-			                                    			</div>
-				                                    	</div>
-				                                    	<div class="col-md-3">
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label">递增电价：</label>
-				                                    			<div class="col-md-4 input-group" > 
-				                                    				<input name="name" v-model="powerPriceLadderPrice.fourthLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/><span class="input-group-addon">元</span>
-	                                           					</div>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                </div>
-				                            </div>
-				                            <!-- 基本电价模板 -->
-				                            <div id="basicCost" class="tab-pane">
-				                                <div class="panel-body">
-				                                    <div class="row">
-				                                    	<div class="col-md-3">
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label"><font color="red">*</font>计费方式：</label>
-				                                    			<label class="radio radio-success radio-inline"> 
-				                                    				<input type="radio" :checked="showBasicPrice" value="0" name="basicPriceType" @click="basicPirceRadioChange()"><label>按运行容量 </label>
-				                                    				
-                                            					</label>
-                                            					<label class="radio radio-success radio-inline"> 
-				                                    				<input type="radio" :checked="!showBasicPrice" value="1"  name="basicPriceType" @click="basicPirceRadioChange()"><label>按需量 </label>
-                                            					</label>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                   <div class="row" v-show="showBasicPrice">
-				                                   		<div class="col-md-3">
-				                                   			<div class="form-group">
-				                                   				<label class="col-md-4 control-label"></label>
-				                                   				<div class="col-md-8 input-group"> 
-				                                    				<input name="name" v-model="basicPrice.electricCostBasicValue" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"
-																				data-parsley-length-message="电价在0-10个字符之间"
-																				/><span class="input-group-addon" >元</span>
-	                                           					</div>
-	                                           					
-				                                   			</div>
-				                                   		</div>
-				                                   </div>
-				                                   <div class="row" v-show="!showBasicPrice">
-				                                   		<div class="col-md-6">
-				                                   			<div class="form-group">
-				                                   				<label class="col-md-2 control-label"></label>
-				                                   				<label class="col-md-3 control-label" style="text-align: center;">实际需量/核定需量(%)</label>
-				                                   				<label class="col-md-1 control-label"></label>
-				                                   				<label class="col-md-3 control-label" style="text-align: center;">实际需量/核定需量(%)</label>
-				                                   				<label class="col-md-3 control-label" style="text-align: center;">单价(元/kVA)</label>
-				                                   			</div>
-				                                   		</div>
-				                                   </div>
-				                                   <div class="row" v-show="!showBasicPrice">
-				                                   		<div class="col-md-6">
-				                                   			<div class="form-group">
-				                                   				<label class="col-md-2 control-label">第一阶梯：</label>
-				                                   				<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.firstStart" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.firstEnd" type="text"
-																				class="form-control" maxlength="10"
-																				@change="basicLadderChange()"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.firstLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-				                                   			</div>
-				                                   		</div>
-				                                   </div>
-				                                   <div class="row" v-show="!showBasicPrice">
-				                                   		<div class="col-md-6">
-				                                   			<div class="form-group">
-				                                   				<label class="col-md-2 control-label">第二阶梯：</label>
-				                                   				<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicSecondStart" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.secondEnd" type="text"
-																				class="form-control" maxlength="10"
-																				@change="basicLadderChange()"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.secondLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-				                                   			</div>
-				                                   		</div>
-				                                   </div>
-				                                   <div class="row" v-show="!showBasicPrice">
-				                                   		<div class="col-md-6">
-				                                   			<div class="form-group">
-				                                   				<label class="col-md-2 control-label">第三阶梯：</label>
-				                                   				<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicThirdStart" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.thirdEnd" type="text"
-																				class="form-control" maxlength="10"
-																				@change="basicLadderChange()"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.thirdLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-				                                   			</div>
-				                                   		</div>
-				                                   </div>
-				                                   <div class="row" v-show="!showBasicPrice">
-				                                   		<div class="col-md-6">
-				                                   			<div class="form-group">
-				                                   				<label class="col-md-2 control-label">第四阶梯：</label>
-				                                   				<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicFourthStart" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-1">
-	                                           						<span>-</span>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.fourthEnd" type="text"
-																				class="form-control" maxlength="10"
-																				readonly="readonly"
-																				placeholder="∞"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-	                                           					<div class="col-md-3" > 
-				                                    				<input name="name" v-model="basicPrice.fourthLadderPrice" type="text"
-																				class="form-control" maxlength="10"
-																				data-parsley-length="[0,10]"/>
-	                                           					</div>
-				                                   			</div>
-				                                   		</div>
-				                                   </div>
-				                                </div>
-				                            </div>
-				                            <!-- 力调电价模板 -->
-				                            <div id="forceCost" class="tab-pane">
-				                                <div class="panel-body">
-				                                    <div class="row">
-				                                    	<div class="col-md-3">
-				                                    		<div class="form-group">
-				                                    			<label class="col-md-4 control-label"><font color="red">*</font>功率因数标准：</label>
-				                                    			<label class="radio radio-success radio-inline"> 
-				                                    				<input type="radio"  :checked = "forceChecked" id="optionsRadios1" name="optionsRadios" @click="changeForceValue('0')"><label>0.80 </label>
-                                            					</label>
-                                            					<label class="radio radio-success radio-inline"> 
-				                                    				<input type="radio"  :checked = "forceChecked1" @click="changeForceValue('1')" id="optionsRadios1" name="optionsRadios"><label>0.85 </label>
-                                            					</label>
-                                            					<label class="radio radio-success radio-inline"> 
-				                                    				<input type="radio"  :checked = "forceChecked2" @click="changeForceValue('2')" id="optionsRadios1" name="optionsRadios"><label>0.90 </label>
-                                            					</label>
-				                                    		</div>
-				                                    	</div>
-				                                    </div>
-				                                    <div class="row">
-				                                    	<div class="col-md-3">
-				                                    		<label class="col-md-4 control-label"><font color="red">*</font>上传附件：</label>
-				                                    		<label class="col-md-8 control-label">
-				                                    			<img id="image" class="cover-radius"  th:src="@{/public/img/upload_img.png}"
-																                           width="100%" style="cursor: pointer;" />
-																<input id="picture_upload" name="file" type="file" @change="getFile($event)"
-																                           style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer;"/>
-																<small class="help-block cover-tips" style="color: #dd4b39;display: none;">请上传图片</small>
-				                                    		</label>
-				                                    	</div>
-				                                    </div>
-				                                </div>
-				                            </div>
-				                        </div>
-				                    </div>
-	                			</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-4 col-sm-offset-3">
-									<button class="btn btn-primary" type="submit" @click="save();">保存</button>
-									<button class="btn btn-white btn-pad" type="button" @click="cancle();">取消</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 电价模板新增结束 -->
-		<!-- 选择时间的页面 -->
-		<div class="modal inmodal" id="timesDiv" tabindex="-1"   aria-hidden="true" data-backdrop="static">
-			<div class="modal-dialog">
-	           <div class="modal-content animated fadeIn">
-	               <div class="modal-header">
-	               		<div class="modal-header">
-                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                               <h4 class="modal-title">选择时间段</h4>
-                       </div>
-	               </div>
-	               <div class="modal-body">
-	               		<!--  
-	                    <div id="timesBody" >
-		                    <span v-for="(item,index) in checkList">
-			                    <input type="checkbox" :value="item.value" :checked="item.isChecked" :disabled="item.disabled" name="timeSelecter" @click="checkItem(item);"  />
-			                    {{item.text}}
-		                    </span>
-	                    </div>
-	                    -->
-	                   	<div class="row">
-	                   		<div class="col-md-12">
-	                   			<div class="checkbox checkbox-success checkbox-inline" v-for="(item,index) in checkList">
-				                      <input :id="'check' + index" type="checkbox" :value="item.value" :checked="item.ischecked" :disabled="item.disabled" name="timeSelecter" @click="selectedItem(item);">
-				                      <label :for="'check' + index">
-				                          {{item.text}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				                      </label>
-		                   		</div>
-	                   		</div>
-	                   	</div>
-	               </div>
-	               <div class="modal-footer">
-	                   <!-- <button type="button" class="btn btn-white btn-pad" data-dismiss="modal">关闭</button> -->
-	                   <button type="button" class="btn btn-primary" data-dismiss="modal" @click="selectTimes()">确定</button>
-	               </div>
-	           </div>
-	       </div>
-		</div>
-		<!-- 选择时间页面结束 -->
-		<!-- 新增变压器参数（运行容量等）页面开始 -->
-		<div class="row" v-show="showTransformer">
-			<div class="col-md-12">
-				<div class="ibox float-e-margins panel panel-primary">
-					<div class="ibox-title panel-heading">
-						<h5>变压器参数配置</h5>
-					</div>
-					<div class="ibox-content panel-body">
-						<form id="transformerForm" method="get" class="form-horizontal"
-							data-parsley-validate="" onsubmit="return false">
-							<div class="row">
-								<div class="col-md-6">
-										<div class="form-group">
-                                   			<label class="col-md-4 control-label"><font color="red">*</font>变压器：</label>
-                                   			<div class="col-md-8">
-                                   				<!-- <input type="hidden" name = "id" v-model="elecTemplateVO.id"/> -->
-                                   				<!-- <input type="hidden" name="equipmentId" v-model="elecTemplateVO.equipmentId"/> -->
-                                   				<select name="equipmentId" v-model="transformerId"
-													class="form-control m-b"
-													@change = "transformerChange()"
-													data-parsley-required-message="变压器名称为必选字段">
-													<option value="">--请选择--</option>
-													<option v-for="item in transformerList" :value="item.id">{{item.name}}</option>
-												</select>
-                                   			</div>
-                                   		</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-										<div class="form-group">
-                                  			<label class="col-md-4 control-label"><font color="red">*</font>额定容量：</label>
-                                  			<div class="col-md-8">
-                                  				<input name="templateCode" v-model="transformerConfigVO.ratedCapacity" type="text"
-													class="form-control" maxlength="10"
-													data-parsley-length="[1, 10]"
-													data-parsley-length-message="额定容量在1-10个字符之间" required=""
-													data-parsley-required-message="额定容量为必填字段" />
-                                			</div>
-                                		</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-										<div class="form-group">
-                                  			<label class="col-md-4 control-label"><font color="red">*</font>运行容量：</label>
-                                  			<div class="col-md-8">
-                                  				<input name="templateCode" v-model="transformerConfigVO.operatingCapacity" type="text"
-													class="form-control" maxlength="10"
-													data-parsley-length="[1, 10]"
-													data-parsley-length-message="运行容量在1-10个字符之间" required=""
-													data-parsley-required-message="运行容量为必填字段" />
-                                			</div>
-                                		</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-										<div class="form-group">
-                                  			<label class="col-md-4 control-label"><font color="red">*</font>合同容量：</label>
-                                  			<div class="col-md-8">
-                                  				<input name="templateCode" v-model="transformerConfigVO.contractCapacity" type="text"
-													class="form-control" maxlength="10"
-													data-parsley-length="[1, 10]"
-													data-parsley-length-message="合同容量在1-10个字符之间" required=""
-													data-parsley-required-message="合同容量为必填字段" />
-                                			</div>
-                                		</div>
-								</div>
-							</div>
-						</form>
-						<div class="form-group">
-							<div class="col-md-4 col-sm-offset-3">
-								<button class="btn btn-primary" type="submit" @click="saveTransformerConfig();">保存</button>
-								<button class="btn btn-white btn-pad" type="button" @click="transformerConfigCancle();">取消</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>	
-		</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 自定义电价输入结束，阶梯电价开始 -->
+                                                <div class="row" v-show="showPowerPriceLadder">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">第一阶梯：</label>
+                                                            <div class="col-md-4">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.firstStart"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.firstEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">递增电价：</label>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.firstLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">元</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="showPowerPriceLadder">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">第二阶梯：</label>
+                                                            <div class="col-md-4">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.secondStart"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.secondEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">递增电价：</label>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.secondLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">元</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="showPowerPriceLadder">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">第三阶梯：</label>
+                                                            <div class="col-md-4">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.thirdStart"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.thirdEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">递增电价：</label>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.thirdLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">元</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="showPowerPriceLadder">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">第四阶梯：</label>
+                                                            <div class="col-md-4">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.fourthStart"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.fourthEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       placeholder="∞"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">kWh</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">递增电价：</label>
+                                                            <div class="col-md-4 input-group">
+                                                                <input name="name"
+                                                                       v-model="powerPriceLadderPrice.fourthLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/><span
+                                                                    class="input-group-addon">元</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 基本电价模板 -->
+                                        <div id="basicCost" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label"><font
+                                                                    color="red">*</font>计费方式：</label>
+                                                            <label class="radio radio-success radio-inline">
+                                                                <input type="radio" :checked="showBasicPrice" value="0"
+                                                                       name="basicPriceType"
+                                                                       @click="basicPirceRadioChange()"><label>按运行容量 </label>
+
+                                                            </label>
+                                                            <label class="radio radio-success radio-inline">
+                                                                <input type="radio" :checked="!showBasicPrice" value="1"
+                                                                       name="basicPriceType"
+                                                                       @click="basicPirceRadioChange()"><label>按需量 </label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="showBasicPrice">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label"></label>
+                                                            <div class="col-md-8 input-group">
+                                                                <input name="name"
+                                                                       v-model="basicPrice.electricCostBasicValue"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"
+                                                                       data-parsley-length-message="电价在0-10个字符之间"
+                                                                /><span class="input-group-addon">元</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showBasicPrice">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-3 control-label"
+                                                                   style="text-align: center;">实际需量/核定需量(%)</label>
+                                                            <label class="col-md-1 control-label"></label>
+                                                            <label class="col-md-3 control-label"
+                                                                   style="text-align: center;">实际需量/核定需量(%)</label>
+                                                            <label class="col-md-3 control-label"
+                                                                   style="text-align: center;">单价(元/kVA)</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showBasicPrice">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label">第一阶梯：</label>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicPrice.firstStart"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicPrice.firstEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       @change="basicLadderChange()"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicPrice.firstLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showBasicPrice">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label">第二阶梯：</label>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicSecondStart"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicPrice.secondEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       @change="basicLadderChange()"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name"
+                                                                       v-model="basicPrice.secondLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showBasicPrice">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label">第三阶梯：</label>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicThirdStart" type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicPrice.thirdEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       @change="basicLadderChange()"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicPrice.thirdLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" v-show="!showBasicPrice">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label">第四阶梯：</label>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicFourthStart"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <span>-</span>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name" v-model="basicPrice.fourthEnd"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       readonly="readonly"
+                                                                       placeholder="∞"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input name="name"
+                                                                       v-model="basicPrice.fourthLadderPrice"
+                                                                       type="text"
+                                                                       class="form-control" maxlength="10"
+                                                                       data-parsley-length="[0,10]"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 力调电价模板 -->
+                                        <div id="forceCost" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label"><font
+                                                                    color="red">*</font>功率因数标准：</label>
+                                                            <label class="radio radio-success radio-inline">
+                                                                <input type="radio" :checked="forceChecked"
+                                                                       id="optionsRadios1" name="optionsRadios"
+                                                                       @click="changeForceValue('0')"><label>0.80 </label>
+                                                            </label>
+                                                            <label class="radio radio-success radio-inline">
+                                                                <input type="radio" :checked="forceChecked1"
+                                                                       @click="changeForceValue('1')"
+                                                                       id="optionsRadios1" name="optionsRadios"><label>0.85 </label>
+                                                            </label>
+                                                            <label class="radio radio-success radio-inline">
+                                                                <input type="radio" :checked="forceChecked2"
+                                                                       @click="changeForceValue('2')"
+                                                                       id="optionsRadios1" name="optionsRadios"><label>0.90 </label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="col-md-4 control-label"><font color="red">*</font>上传附件：</label>
+                                                        <label class="col-md-8 control-label">
+                                                            <img id="image" class="cover-radius"
+                                                                 th:src="@{/public/img/upload_img.png}"
+                                                                 width="100%" style="cursor: pointer;"/>
+                                                            <input id="picture_upload" name="file" type="file"
+                                                                   @change="getFile($event)"
+                                                                   style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer;"/>
+                                                            <small class="help-block cover-tips"
+                                                                   style="color: #dd4b39;display: none;">请上传图片
+                                                            </small>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit" @click="save();">保存</button>
+                                <button class="btn btn-white btn-pad" type="button" @click="cancle();">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 电价模板新增结束 -->
+    <!-- 选择时间的页面 -->
+    <div class="modal inmodal" id="timesDiv" tabindex="-1" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                        <h4 class="modal-title">选择时间段</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <!--
+                 <div id="timesBody" >
+                     <span v-for="(item,index) in checkList">
+                         <input type="checkbox" :value="item.value" :checked="item.isChecked" :disabled="item.disabled" name="timeSelecter" @click="checkItem(item);"  />
+                         {{item.text}}
+                     </span>
+                 </div>
+                 -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="checkbox checkbox-success checkbox-inline" v-for="(item,index) in checkList">
+                                <input :id="'check' + index" type="checkbox" :value="item.value"
+                                       :checked="item.ischecked" :disabled="item.disabled" name="timeSelecter"
+                                       @click="selectedItem(item);">
+                                <label :for="'check' + index">
+                                    {{item.text}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-white btn-pad" data-dismiss="modal">关闭</button> -->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="selectTimes()">确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 选择时间页面结束 -->
+    <!-- 新增变压器参数（运行容量等）页面开始 -->
+    <div class="row" v-show="showTransformer">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins panel panel-primary">
+                <div class="ibox-title panel-heading">
+                    <h5>变压器参数配置</h5>
+                </div>
+                <div class="ibox-content panel-body">
+                    <form id="transformerForm" method="get" class="form-horizontal"
+                          data-parsley-validate="" onsubmit="return false">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><font color="red">*</font>变压器：</label>
+                                    <div class="col-md-8">
+                                        <!-- <input type="hidden" name = "id" v-model="elecTemplateVO.id"/> -->
+                                        <!-- <input type="hidden" name="equipmentId" v-model="elecTemplateVO.equipmentId"/> -->
+                                        <select name="equipmentId" v-model="transformerId"
+                                                class="form-control m-b"
+                                                @change="transformerChange()"
+                                                data-parsley-required-message="变压器名称为必选字段">
+                                            <option value="">--请选择--</option>
+                                            <option v-for="item in transformerList" :value="item.id">{{item.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><font color="red">*</font>额定容量：</label>
+                                    <div class="col-md-8">
+                                        <input name="templateCode" v-model="transformerConfigVO.ratedCapacity"
+                                               type="text"
+                                               class="form-control" maxlength="10"
+                                               data-parsley-length="[1, 10]"
+                                               data-parsley-length-message="额定容量在1-10个字符之间" required=""
+                                               data-parsley-required-message="额定容量为必填字段"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><font color="red">*</font>运行容量：</label>
+                                    <div class="col-md-8">
+                                        <input name="templateCode" v-model="transformerConfigVO.operatingCapacity"
+                                               type="text"
+                                               class="form-control" maxlength="10"
+                                               data-parsley-length="[1, 10]"
+                                               data-parsley-length-message="运行容量在1-10个字符之间" required=""
+                                               data-parsley-required-message="运行容量为必填字段"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><font color="red">*</font>合同容量：</label>
+                                    <div class="col-md-8">
+                                        <input name="templateCode" v-model="transformerConfigVO.contractCapacity"
+                                               type="text"
+                                               class="form-control" maxlength="10"
+                                               data-parsley-length="[1, 10]"
+                                               data-parsley-length-message="合同容量在1-10个字符之间" required=""
+                                               data-parsley-required-message="合同容量为必填字段"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-offset-3">
+                            <button class="btn btn-primary" type="submit" @click="saveTransformerConfig();">保存</button>
+                            <button class="btn btn-white btn-pad" type="button" @click="transformerConfigCancle();">取消
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <script type="text/javascript" th:src="@{/public/js/sys/elecTemplate.js}"></script>

@@ -775,7 +775,7 @@
             },
             onClickNode: function (event, node) {
                 var setting = data.getSetting(event.data.treeId),
-                    clickFlag = ( (setting.view.autoCancelSelected && (event.ctrlKey || event.metaKey)) && data.isSelectedNode(setting, node)) ? 0 : (setting.view.autoCancelSelected && (event.ctrlKey || event.metaKey) && setting.view.selectedMulti) ? 2 : 1;
+                    clickFlag = ((setting.view.autoCancelSelected && (event.ctrlKey || event.metaKey)) && data.isSelectedNode(setting, node)) ? 0 : (setting.view.autoCancelSelected && (event.ctrlKey || event.metaKey) && setting.view.selectedMulti) ? 2 : 1;
                 if (tools.apply(setting.callback.beforeClick, [setting.treeId, node, clickFlag], true) == false) return true;
                 if (clickFlag === 0) {
                     view.cancelPreSelectedNode(setting, node);
@@ -815,7 +815,7 @@
             },
             onSelectStart: function (e) {
                 var n = e.originalEvent.srcElement.nodeName.toLowerCase();
-                return (n === "input" || n === "textarea" );
+                return (n === "input" || n === "textarea");
             }
         },
         //method of tools for zTree
@@ -877,7 +877,7 @@
                 return ($(target).parent("li").get(0) || $(target).parentsUntil("li").parent().get(0));
             },
             isChildOrSelf: function (dom, parentId) {
-                return ( $(dom).closest("#" + parentId).length > 0 );
+                return ($(dom).closest("#" + parentId).length > 0);
             },
             uCanDo: function (setting, e) {
                 return true;
@@ -1808,12 +1808,12 @@
                     return data.isSelectedNode(setting, node);
                 },
                 reAsyncChildNodesPromise: function (parentNode, reloadType, isSilent) {
-                    var promise = new Promise(function(resolve, reject) {
+                    var promise = new Promise(function (resolve, reject) {
                         try {
-                            zTreeTools.reAsyncChildNodes(parentNode, reloadType, isSilent, function() {
+                            zTreeTools.reAsyncChildNodes(parentNode, reloadType, isSilent, function () {
                                 resolve(parentNode);
                             });
-                        } catch(e) {
+                        } catch (e) {
                             reject(e);
                         }
                     });

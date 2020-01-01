@@ -16,8 +16,9 @@ public class ListUtils {
      * <br>例：list:[1,2,3,4,5,6,7,8]，start:2,offset:3
      * <br>返回：[3,4,5]<br>
      * Lian weimao CreateTime:2018年7月18日 上午11:07:27
-     * @param list 数据源
-     * @param start 截取的起始位置 从0开始
+     *
+     * @param list   数据源
+     * @param start  截取的起始位置 从0开始
      * @param offset 截取量
      * @return
      */
@@ -36,9 +37,10 @@ public class ListUtils {
      * <br>例：list:[1,2,3,4,5,6,7,8]，currentPage:2,pageSize:3
      * <br>返回：[4,5,6]<br>
      * Lian weimao CreateTime:2018年7月18日 上午11:10:08
-     * @param list 数据源
+     *
+     * @param list        数据源
      * @param currentPage 当前页码 从1开始
-     * @param pageSize 页面数据数量
+     * @param pageSize    页面数据数量
      * @return
      */
     public static <T> List<T> limitPage(List<T> list, int currentPage, int pageSize) {

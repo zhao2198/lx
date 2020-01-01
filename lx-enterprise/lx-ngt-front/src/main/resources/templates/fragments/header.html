@@ -2,85 +2,89 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<style type="text/css">
-    [v-cloak] {
-        display: none ;
-    }
-</style>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-   
-   	<!-- BEGIN HEADER -->
-   	
-   	<div v-cloak id="header" class="row border-bottom" th:fragment="header">
-		<nav role="navigation" class="navbar navbar-static-top white-bg" style="margin-bottom: 0px;background: #0AABFC;">
-			<!--<div class="navbar-header">
-				<a href="#" class="navbar-minimalize minimalize-styl-2 ">
-					<i class="fa fa-bars"></i>
-				</a>
-			</div> -->
-			<div class="logoDiv">
-				<img th:src="@{/public/img/logo.png}" style="width: 100px;height: 32px;"/>
-			</div>
-			<div class="collapses navbar-minimalize">
-				<a style="color: white;">
-					<i class="iconfont icon-hanbaocaidanzhedie"></i>
-				</a>
-			</div>
-			<ul class="titleuls">
-				<li :title="companyName">{{companyName}}管理平台</li> 
-				<li>
-					<span id="clock"></span>
-				</li>
-			</ul>
-			<ul class="rightTitleuls">
-			<li @click="index();">
-					<i class="fa fa-home" style="font-size: 18px;"></i>
-					<span><a  href="javascript:void(0);">首页</a></span>
-				</li>
-				<li @click="todo();">
-					<i class="iconfont icon-qunfengxiaoxitishilingdang"></i>
-					<span ><a  href="javascript:void(0);"></a></span>
-				</li>
-				<li @click="alarm();">
-					<i class="iconfont icon-erji-gaojingguanli"></i>
-					<span ><a  href="javascript:void(0);"></a><span v-cloak class="label label-info" >{{alarmNum}}</span></span>
-				</li>
-				<li>
-					<div class="dropdown">
-					  	<div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					  	<a>
-					  		<img alt="image" class="imgsRadio" :src="curPhoto"  onerror="javascript:this.src='public/img/photo.jpg'">
-					    	<i class="iconfont icon-xiala"></i>
-					    	</a>
-					  	</div>
-					  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li>
-						    	<div class="dropdownImg">
-						    		<div class="Dropleft">
-						    			<p>{{curName}}</p>
-						    			<p>{{curLoginName}}</p>	
-						    		</div>
-						    		<div class="DropRight">
-						    			 <img alt="image" class="imgsRadio" :src="curPhoto"  onerror="javascript:this.src='public/img/photo.jpg'">
-						    		</div>
-						    	</div>
-						    </li>
-						    <li><a href="javascript:void(0);" @click="center();">
-						    	<i class="iconfont icon-yonghuming"></i>
-						    	<span>个人中心</span>
-						    </a></li>
-						    <li><a href="javascript:void(0);"  @click="logout();">
-						    	<i class="iconfont icon-logout"></i>
-						    	<span>退出</span>
-						    </a></li>
-					  	</ul>
-					</div>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	
+
+<!-- BEGIN HEADER -->
+
+<div v-cloak id="header" class="row border-bottom" th:fragment="header">
+    <nav role="navigation" class="navbar navbar-static-top white-bg" style="margin-bottom: 0px;background: #0AABFC;">
+        <!--<div class="navbar-header">
+            <a href="#" class="navbar-minimalize minimalize-styl-2 ">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div> -->
+        <div class="logoDiv">
+            <img th:src="@{/public/img/logo.png}" style="width: 100px;height: 32px;"/>
+        </div>
+        <div class="collapses navbar-minimalize">
+            <a style="color: white;">
+                <i class="iconfont icon-hanbaocaidanzhedie"></i>
+            </a>
+        </div>
+        <ul class="titleuls">
+            <li :title="companyName">{{companyName}}管理平台</li>
+            <li>
+                <span id="clock"></span>
+            </li>
+        </ul>
+        <ul class="rightTitleuls">
+            <li @click="index();">
+                <i class="fa fa-home" style="font-size: 18px;"></i>
+                <span><a href="javascript:void(0);">首页</a></span>
+            </li>
+            <li @click="todo();">
+                <i class="iconfont icon-qunfengxiaoxitishilingdang"></i>
+                <span><a href="javascript:void(0);"></a></span>
+            </li>
+            <li @click="alarm();">
+                <i class="iconfont icon-erji-gaojingguanli"></i>
+                <span><a href="javascript:void(0);"></a><span v-cloak
+                                                              class="label label-info">{{alarmNum}}</span></span>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                         aria-expanded="true">
+                        <a>
+                            <img alt="image" class="imgsRadio" :src="curPhoto"
+                                 onerror="javascript:this.src='public/img/photo.jpg'">
+                            <i class="iconfont icon-xiala"></i>
+                        </a>
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <div class="dropdownImg">
+                                <div class="Dropleft">
+                                    <p>{{curName}}</p>
+                                    <p>{{curLoginName}}</p>
+                                </div>
+                                <div class="DropRight">
+                                    <img alt="image" class="imgsRadio" :src="curPhoto"
+                                         onerror="javascript:this.src='public/img/photo.jpg'">
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="javascript:void(0);" @click="center();">
+                            <i class="iconfont icon-yonghuming"></i>
+                            <span>个人中心</span>
+                        </a></li>
+                        <li><a href="javascript:void(0);" @click="logout();">
+                            <i class="iconfont icon-logout"></i>
+                            <span>退出</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+
 </body>
 
 </html>

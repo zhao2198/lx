@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
- 
+
 <body>
 
 <nav class="navbar-default navbar-static-side" role="navigation" th:fragment="left">
-		    <div class="sidebar-collapse" id="left">
-		        <ul id="side-menu" class="nav metismenu">
-		        	
-		        	<li @click="clickli($event);" v-cloak class="first"  v-for="(item,index) in permissions"  v-show="item.show==1">
-            	<a v-if="item.type==1" href="#"><i class="fa" :class="item.className"></i> <span  class="nav-label">{{item.text}}</span> <span class="fa arrow"></span></a>
-            	<ul v-if="item.type==1" class="nav nav-second-level collapse" :show="item.show">
-                    <li class="menu" v-for="(childItem,index) in item.children" v-if="childItem.show" ><a :type="item.type" @click="clickItem($event);" href="javascript:void(0);" :data-url="childItem.path">{{childItem.text}}</a></li>
-                         
+    <div class="sidebar-collapse" id="left">
+        <ul id="side-menu" class="nav metismenu">
+
+            <li @click="clickli($event);" v-cloak class="first" v-for="(item,index) in permissions"
+                v-show="item.show==1">
+                <a v-if="item.type==1" href="#"><i class="fa" :class="item.className"></i> <span class="nav-label">{{item.text}}</span>
+                    <span class="fa arrow"></span></a>
+                <ul v-if="item.type==1" class="nav nav-second-level collapse" :show="item.show">
+                    <li class="menu" v-for="(childItem,index) in item.children" v-if="childItem.show"><a
+                            :type="item.type" @click="clickItem($event);" href="javascript:void(0);"
+                            :data-url="childItem.path">{{childItem.text}}</a></li>
+
                 </ul>
-            	<a v-if="item.type==2" :type="item.type" href="#" :data-url="item.path" @click="clickItem($event);"><i class="fa" :class="item.className"></i> <span v-cloak class="nav-label">{{item.text}}</span><span class="fa arrow"></span></a>
-            	<ul v-if="item.type==2"></ul>
-            	
+                <a v-if="item.type==2" :type="item.type" href="#" :data-url="item.path" @click="clickItem($event);"><i
+                        class="fa" :class="item.className"></i> <span v-cloak
+                                                                      class="nav-label">{{item.text}}</span><span
+                        class="fa arrow"></span></a>
+                <ul v-if="item.type==2"></ul>
+
             </li>
-		        	
-		        </ul>
-		    </div>
-		</nav>
+
+        </ul>
+    </div>
+</nav>
 
 
 </body>

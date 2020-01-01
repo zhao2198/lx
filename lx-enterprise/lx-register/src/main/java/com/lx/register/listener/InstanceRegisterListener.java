@@ -9,9 +9,9 @@ import org.springframework.lang.NonNull;
 
 @Configuration
 @Slf4j
-public class InstanceRegisterListener implements ApplicationListener<EurekaInstanceRegisteredEvent>{
+public class InstanceRegisterListener implements ApplicationListener<EurekaInstanceRegisteredEvent> {
     @Override
     public void onApplicationEvent(@NonNull EurekaInstanceRegisteredEvent eurekaInstanceRegisteredEvent) {
-        log.info("服务：{}，注册成功了",eurekaInstanceRegisteredEvent.getInstanceInfo().getAppName());
+        log.info("服务：{}，注册成功了", eurekaInstanceRegisteredEvent.getInstanceInfo().getAppName());
     }
 }

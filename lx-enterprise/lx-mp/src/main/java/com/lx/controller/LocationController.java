@@ -14,9 +14,10 @@ public class LocationController {
 
     @Autowired
     private LocationRepository locationRepository;
+
     @ResponseBody
     @RequestMapping("/hello")
-    public List<Location> hello(){
+    public List<Location> hello() {
         return locationRepository.findAll();
     }
 }

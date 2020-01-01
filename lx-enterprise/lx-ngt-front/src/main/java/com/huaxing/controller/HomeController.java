@@ -16,60 +16,60 @@ import java.util.Date;
 @RequestMapping("/")
 @Controller
 public class HomeController {
-	@Value("${lx.api.url.sso}")
-	private String ssoUrl;
-	@Value("${lx.api.url.ngt}")
-	private String ngtUrl;
+    @Value("${lx.api.url.sso}")
+    private String ssoUrl;
+    @Value("${lx.api.url.ngt}")
+    private String ngtUrl;
 
-	@RequestMapping("/")
-	public String home(Model model) {
+    @RequestMapping("/")
+    public String home(Model model) {
 
-		addAttribute(model);
-		return "home";
-	}
+        addAttribute(model);
+        return "home";
+    }
 
-	@RequestMapping("/index")
-	public String index() {
+    @RequestMapping("/index")
+    public String index() {
 
-		return "index";
-	}
+        return "index";
+    }
 
-	private void addAttribute(Model model) {
-		model.addAttribute("ssoUrl", ssoUrl);
-		model.addAttribute("ngtUrl", ngtUrl);
+    private void addAttribute(Model model) {
+        model.addAttribute("ssoUrl", ssoUrl);
+        model.addAttribute("ngtUrl", ngtUrl);
 
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		model.addAttribute("curDay", format.format(date));
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.DATE, 1);
-		model.addAttribute("firstDay", format.format(cal.getTime()));
-	}
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        model.addAttribute("curDay", format.format(date));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.DATE, 1);
+        model.addAttribute("firstDay", format.format(cal.getTime()));
+    }
 
-	@RequestMapping("/content")
-	public String content() {
+    @RequestMapping("/content")
+    public String content() {
 
-		return "content";
-	}
+        return "content";
+    }
 
-	@RequestMapping("/login")
-	public String login(Model model) {
+    @RequestMapping("/login")
+    public String login(Model model) {
 
-		addAttribute(model);
-		return "login";
-	}
+        addAttribute(model);
+        return "login";
+    }
 
-	@RequestMapping("/loginout")
-	public String loginout() {
+    @RequestMapping("/loginout")
+    public String loginout() {
 
-		return "login";
-	}
+        return "login";
+    }
 
-	@RequestMapping("/unauthorization")
-	public String auth() {
+    @RequestMapping("/unauthorization")
+    public String auth() {
 
-		return "403";
-	}
+        return "403";
+    }
 
 }

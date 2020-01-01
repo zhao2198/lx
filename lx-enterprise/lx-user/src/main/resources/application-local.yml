@@ -13,7 +13,7 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-#eureka:
+  #eureka:
   client:
     healthcheck:
       enabled: true

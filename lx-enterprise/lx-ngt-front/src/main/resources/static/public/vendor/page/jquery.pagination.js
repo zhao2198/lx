@@ -8,7 +8,7 @@
  * @调用方法
  * $(selector).pagination(option, callback);
  * -此处callback是初始化调用，option里的callback是点击页码后调用
- * 
+ *
  * -- example --
  * $(selector).pagination({
  *     ... // 配置参数
@@ -65,7 +65,8 @@
         jumpIptCls: 'jump-ipt', //文本框内容
         jumpBtnCls: 'jump-btn', //跳转按钮
         jumpBtn: '跳转', //跳转按钮文本
-        callback: function () {} //回调
+        callback: function () {
+        } //回调
     };
 
     var Pagination = function (element, options) {
@@ -100,12 +101,12 @@
         this.getCurrent = function () {
             return current;
         };
-        
-        this.buildNode = function(className, nodeText,dataPage) {
-        	var html = ' <li class="paginate_button '+dataPage+'" id="DataTables_Table_0_previous">';
-        		html += '<a href="javascript:;" data-page="'+dataPage+'">'+nodeText+'</a>';
-        		html +='</li>';
-        		return html;
+
+        this.buildNode = function (className, nodeText, dataPage) {
+            var html = ' <li class="paginate_button ' + dataPage + '" id="DataTables_Table_0_previous">';
+            html += '<a href="javascript:;" data-page="' + dataPage + '">' + nodeText + '</a>';
+            html += '</li>';
+            return html;
         }
 
         /**
@@ -123,37 +124,37 @@
                     if (opts.coping) {
                         var home = opts.coping && opts.homePage ? opts.homePage : '1';
                         //html += '<a href="javascript:;" data-page="1">' + home + '</a>';
-                        
-                        html += this.buildNode('', home,1);
+
+                        html += this.buildNode('', home, 1);
                     }
                     var start = current > opts.count - 1 ? current + opts.count - 1 > pageCount ? current - (opts.count - (pageCount - current)) : current - 2 : 1;
                     var end = current + opts.count - 1 > pageCount ? pageCount : start + opts.count;
                     for (; start <= end; start++) {
                         if (start != current) {
-                           // html += '<a href="javascript:;" data-page="' + start + '">' + start + '</a>';
-                            
-                            html += this.buildNode('', start,start);
+                            // html += '<a href="javascript:;" data-page="' + start + '">' + start + '</a>';
+
+                            html += this.buildNode('', start, start);
                         } else {
-                           // html += '<span class="' + opts.activeCls + '">' + start + '</span>';
-                            
-                            html += this.buildNode(opts.activeCls, start,start);
+                            // html += '<span class="' + opts.activeCls + '">' + start + '</span>';
+
+                            html += this.buildNode(opts.activeCls, start, start);
                         }
                     }
                     if (opts.coping) {
                         var _end = opts.coping && opts.endPage ? opts.endPage : pageCount;
-                       // html += '<a href="javascript:;" data-page="' + pageCount + '">' + _end + '</a>';
-                        
-                        html += this.buildNode('', _end,pageCount);
+                        // html += '<a href="javascript:;" data-page="' + pageCount + '">' + _end + '</a>';
+
+                        html += this.buildNode('', _end, pageCount);
                     }
-                   // html += '<a href="javascript:;" class="' + opts.nextCls + '">' + opts.nextContent + '</a>';
-                    
+                    // html += '<a href="javascript:;" class="' + opts.nextCls + '">' + opts.nextContent + '</a>';
+
                     html += this.buildNode(opts.nextCls, opts.nextContent);
                     break;
                 case 'unfixed': //不固定按钮模式
-                	
+
                     if (opts.keepShowPN || current > 1) { //上一页
-                       // html += '<a href="javascript:;" class="' + opts.prevCls + '">' + opts.prevContent + '</a>';
-                        
+                        // html += '<a href="javascript:;" class="' + opts.prevCls + '">' + opts.prevContent + '</a>';
+
                         html += this.buildNode(opts.prevContent, opts.prevCls);
                     } else {
                         if (opts.keepShowPN == false) {
@@ -163,32 +164,32 @@
                     if (current >= opts.count + 2 && current != 1 && pageCount != opts.count) {
                         var home = opts.coping && opts.homePage ? opts.homePage : '1';
                         //html += opts.coping ? '<a href="javascript:;" data-page="1">' + home + '</a><span>...</span>' : '';
-                        
-                        html += opts.coping ?this.buildNode('', home,1)+'<span>...</span>': '';
+
+                        html += opts.coping ? this.buildNode('', home, 1) + '<span>...</span>' : '';
                     }
                     var start = (current - opts.count) <= 1 ? 1 : (current - opts.count);
                     var end = (current + opts.count) >= pageCount ? pageCount : (current + opts.count);
                     for (; start <= end; start++) {
                         if (start <= pageCount && start >= 1) {
                             if (start != current) {
-                               // html += '<a href="javascript:;" data-page="' + start + '">' + start + '</a>';
-                                html += this.buildNode('', start,start);
+                                // html += '<a href="javascript:;" data-page="' + start + '">' + start + '</a>';
+                                html += this.buildNode('', start, start);
                             } else {
-                               // html += '<span class="' + opts.activeCls + '">' + start + '</span>';
-                                
-                                html += this.buildNode(opts.activeCls, start,start);
+                                // html += '<span class="' + opts.activeCls + '">' + start + '</span>';
+
+                                html += this.buildNode(opts.activeCls, start, start);
                             }
                         }
                     }
                     if (current + opts.count < pageCount && current >= 1 && pageCount > opts.count) {
                         var end = opts.coping && opts.endPage ? opts.endPage : pageCount;
-                       // html += opts.coping ? '<span>...</span><a href="javascript:;" data-page="' + pageCount + '">' + end + '</a>' : '';
-                        
-                        html += opts.coping ?'<span>...</span>' + this.buildNode('', end, pageCount): '';
+                        // html += opts.coping ? '<span>...</span><a href="javascript:;" data-page="' + pageCount + '">' + end + '</a>' : '';
+
+                        html += opts.coping ? '<span>...</span>' + this.buildNode('', end, pageCount) : '';
                     }
                     if (opts.keepShowPN || current < pageCount) { //下一页
                         //html += '<a href="javascript:;" class="' + opts.nextCls + '">' + opts.nextContent + '</a>';
-                        
+
                         html += this.buildNode(opts.nextCls, opts.nextContent);
                     } else {
                         if (opts.keepShowPN == false) {
@@ -201,7 +202,7 @@
                 default:
             }
             html += opts.jump ? '<input type="text" class="' + opts.jumpIptCls + '"><a href="javascript:;" class="' + opts.jumpBtnCls + '">' + opts.jumpBtn + '</a>' : '';
-            
+
             html += '</ul>';
             $obj.empty().html(html);
         };
@@ -276,7 +277,8 @@
             parameter = {};
         } else {
             parameter = parameter || {};
-            callback = callback || function () {};
+            callback = callback || function () {
+            };
         }
         var options = $.extend({}, defaults, parameter);
         return this.each(function () {

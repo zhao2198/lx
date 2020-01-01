@@ -12,7 +12,6 @@
     <packaging>jar</packaging>
 
 
-
     <properties>
         <weixin-java-mp.version>3.6.0</weixin-java-mp.version>
 
@@ -27,7 +26,6 @@
     <dependencies>
 
         <!-- spring boot web支持：mvc,aop... -->
-
         <dependency>
 
             <groupId>org.springframework.boot</groupId>
@@ -35,6 +33,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
 
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -80,8 +79,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-
 
 
         <dependency>

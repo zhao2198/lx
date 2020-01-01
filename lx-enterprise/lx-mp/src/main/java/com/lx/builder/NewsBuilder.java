@@ -10,17 +10,17 @@ import java.util.List;
 /**
  * @author Binary Wang(https://github.com/binarywang)
  */
-public class NewsBuilder  {
+public class NewsBuilder {
 
 
     public WxMpXmlOutMessage build(List<WxMpXmlOutNewsMessage.Item> list, WxMpXmlMessage wxMessage,
                                    WxMpService service) {
 
 
-        WxMpXmlOutNewsMessage.Item [] items = list.toArray(new WxMpXmlOutNewsMessage.Item[0]);
+        WxMpXmlOutNewsMessage.Item[] items = list.toArray(new WxMpXmlOutNewsMessage.Item[0]);
         WxMpXmlOutNewsMessage m = WxMpXmlOutMessage.NEWS().addArticle(items)
-            .fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
-            .build();
+                .fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
+                .build();
 
         return m;
     }
