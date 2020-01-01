@@ -30,7 +30,7 @@
 
 	<properties>
 		<main.basedir>${basedir}</main.basedir>
-		<revision>2.0.0-SNAPSHOT</revision>
+		<revision>2.0.1-SNAPSHOT</revision>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -60,37 +60,25 @@
 				<module>lx-enterprise</module>
 				<module>lx-framework-sample</module>
 			</modules>
-			<build>
-				<plugins>
-					<!--主要用于把整个项目进行deploy到中央仓库-->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
+
 		</profile>
 	</profiles>
 
+
+
 	<distributionManagement>
-		<snapshotRepository>
-			<id>oss</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</snapshotRepository>
 		<repository>
-			<id>oss</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>Nexus</id>
+			<name>Release Deploy</name>
+			<url>http://192.168.119.19:8081/repository/maven-releases/</url>
 		</repository>
+		<snapshotRepository>
+			<id>Nexus</id>
+			<name>Snapshot Deploy</name>
+			<url>http://192.168.119.19:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
 	</distributionManagement>
+
+
 
 </project>

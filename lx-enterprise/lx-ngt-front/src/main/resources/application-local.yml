@@ -1,0 +1,26 @@
+server:
+  port: 9003
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 30
+  servlet:
+    context-path: /back
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - beans
+        - info
+        - env
+        - mappings
+        - health
+logging:
+  config: classpath:logback-spring.xml
+  file: D:/logs/springboot.log                                                                                                                                                                                                                                                                                                                 
+lx:
+  api:
+    url:
+      sso: http://127.0.0.1:9000/sso/
+      ngt: http://127.0.0.1:8080/ngt/
+

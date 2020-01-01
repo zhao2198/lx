@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: ${profile.active}
+  application:
+    name: front
+  thymeleaf:
+    cache: false
+    mode: html5
+    suffix: .html
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    favicon:
+      enabled: false
+

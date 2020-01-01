@@ -1,0 +1,28 @@
+server:
+  port: 9003
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 30
+  servlet:
+    context-path: /back
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - beans
+        - info
+        - env
+        - mappings
+        - health
+logging:
+  config: classpath:logback-spring.xml
+  file: /var/log/ngt/ngtOnline.log
+lx:
+  api:
+    url:
+      sso: http://sso.test.com/
+      ngt: http://ngt.test.com/ngt/
+      file: http://file.test.com/upload
+      center: http://sale.test.com/
+      socket: ws://192.168.0.108:8080/broker/websocket/

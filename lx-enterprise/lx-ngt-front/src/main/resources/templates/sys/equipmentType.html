@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+</head>
+<body>
+	<div v-cloak class="wrapper wrapper-content" id="ngt">
+
+
+		<div class="row" v-show="showList">
+			<div class="col-lg-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<h5>设备分类列表</h5>
+
+					</div>
+					<div class="ibox-content">
+
+						<div class="table-responsive">
+							<div id="DataTables_Table_0_wrapper"
+								class="dataTables_wrapper form-inline dt-bootstrap">
+
+								<div class="row">
+									<div class="col-lg-12" id="pull-left">
+										<div class="pull-left">
+												<button v-if="showBtn" class="btn btn-primary " type="button" @click="init();"><i class="fa fa-circle-thin"></i>&nbsp;初始化</button>
+										</div>
+									</div>
+								</div>
+								<table
+									class="table table-striped table-bordered table-hover dataTables-example dataTable"
+									
+									aria-describedby="DataTables_Table_0_info" role="grid" id="tree">
+									<thead>
+										<tr role="row">
+														<th>类别名称</th>
+														<th>备注信息</th>
+														<th width="100">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr :class="item.className" role="row" v-for="(item,index) in list">
+											<td>{{ item.name }}</td>
+											<td>{{ item.remarks }}</td>
+											<td>
+											<button @click="initAdd(item)" class="btn-white btn" v-if="item.tid !=11" title="添加下级分类"><i class="fa fa-plus-square text-navy"></i></button>
+												<div class="btn-group" v-if="item.parentId !=0">
+															<button class="btn-white btn" type="button" title="修改" @click="initUpdate(item.id)"><i class="fa fa-edit text-navy"></i></button>
+															<button class="btn-white btn" type="button" title="删除" @click="deleteItem(item.id)"><i class="fa fa-remove text-navy"></i></button>
+															
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- add -->
+
+		<div class="row" v-show="!showList">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins panel panel-primary">
+					<div class="ibox-title panel-heading">
+						<h5>{{actionName}}设备分类</h5>
+					</div>
+					<div class="ibox-content panel-body">
+						<form id="form" method="get" class="form-horizontal"
+							data-parsley-validate="" onsubmit="return false">
+							<input type="hidden" name="id" v-model="equipmentTypeVO.id" />
+							<input name="parentId" v-model="equipmentTypeVO.parentId" type="hidden" />
+																																				
+								<div class="form-group">
+								<label class="col-sm-2 control-label"><font color="red">*</font>类别名称：</label>
+
+								<div class="col-sm-4">
+									<input name="name" v-model="equipmentTypeVO.name" type="text"
+										class="form-control" maxlength="30"
+										data-parsley-length="[2, 30]"
+										data-parsley-length-message="类别名称在2-30个字符之间" required=""
+										data-parsley-required-message="类别名称 为必填字段" >
+								</div>
+							</div>
+
+
+																													
+								<div class="form-group">
+								<label class="col-sm-2 control-label">备注信息：</label>
+
+								<div class="col-sm-4">
+									<input name="remarks" v-model="equipmentTypeVO.remarks" type="text"
+										class="form-control" maxlength="50"
+										data-parsley-length="[0,50]"
+										data-parsley-length-message="备注最大长度为50个字符">
+								</div>
+							</div>
+							
+
+																					
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-3">
+
+									<button class="btn btn-primary" type="submit" @click="save();">保存</button>
+									<button class="btn btn-white btn-pad" type="button" @click="cancle();">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
+
+
+<script type="text/javascript" th:src="@{/public/js/sys/equipmentType.js}"></script>
+
+
+
+
+
+
+

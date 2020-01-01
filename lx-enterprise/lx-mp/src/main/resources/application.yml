@@ -1,0 +1,41 @@
+
+logging:
+  level:
+    org.springframework.web: INFO
+    com.github.binarywang.demo.wx.mp: DEBUG
+    me.chanjar.weixin: DEBUG
+wx:
+  mp:
+    configs:
+      - appId: wxb2f085f2dee3dfbf
+        secret: 90188000caf40578f622ffbbc0aed20b
+        token: zxcvbnm
+        aesKey: kIlfxioJg5QIRKntprL8Pwp7HkVa0dLvsxW0VDVFeZJ
+      - appId: wxe754078366d4cc21
+        secret: 116e312ea25f1039129e2cc2a4714424
+        token: test
+        aesKey: kIlfxioJg5QIRKntprL8Pwp7HkVa0dLvsxW0VDVFeZJ
+server:
+  port: 8888
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: h2
+  datasource:
+    url: jdbc:h2:mem:dbtest
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+    schema:
+      - classpath:db/schema.sql
+    data:
+      - classpath:db/data.sql
+    initialization-mode: always
+  h2:
+    console:
+      path: /h2
+      enabled: true
+      settings:
+        web-allow-others: true

@@ -31,6 +31,8 @@
 		<module>lx-register</module>
 		<module>lx-admin</module>
         <module>lx-code-generator</module>
+		<module>lx-ngt-front</module>
+		<module>lx-mp</module>
     </modules>
 
     <dependencyManagement>

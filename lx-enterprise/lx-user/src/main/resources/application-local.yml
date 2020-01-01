@@ -30,7 +30,7 @@ lx:
     write:
       username: root
       password: 123456
-      jdbcUrl: jdbc:mysql://127.0.0.1:3306/user?serverTimezone=UTC
+      jdbcUrl: jdbc:mysql://192.168.118.82:3306/user?serverTimezone=UTC
       jdbcPool:
         maximumPoolSize: 30
         driverClassName: com.mysql.jdbc.Driver

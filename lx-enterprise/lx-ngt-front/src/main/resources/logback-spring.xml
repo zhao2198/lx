@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+    <contextName>logback</contextName>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springboot.sample" level="TRACE" />   
+    <logger name="java.sql" level="DEBUG" />
+    <logger name="com.huaxing" level="DEBUG" />
+	<!-- dev、test-->
+    <springProfile name="local,dev,test">
+        <logger name="org.springframework.web" level="DEBUG"/>
+        <logger name="org.springboot.sample" level="DEBUG" />
+        <logger name="com.huaxing" level="DEBUG" />
+    </springProfile>
+
+    <!-- prod -->
+    <springProfile name="pro">
+        <logger name="org.springframework.web" level="DEBUG"/>
+        <logger name="org.springboot.sample" level="DEBUG" />
+        <logger name="com.huaxing" level="ERROR" />
+    </springProfile>
+
+</configuration>

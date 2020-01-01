@@ -1,5 +1,11 @@
 package com.lx.framework.configure.mybatis;
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
+import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.google.common.base.Strings;
@@ -9,8 +15,10 @@ import com.lx.framework.configure.jdbc.LxDataSourceAutoConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.mapper.ClassPathMapperScanner;
@@ -110,6 +118,9 @@ public class LxMybatisAutoConfiguration extends BaseAutoConfiguration implements
       sqlSessionFactoryBean.setMapperLocations(mybatisProperties.resolveMapperLocations());
     }
 
+    sqlSessionFactoryBean.setGlobalConfig(this.getGlobalConfig());
+    TypeHandlerRegistry registry = configuration.getTypeHandlerRegistry();
+
     PaginationInterceptor paginationInterceptor =  new PaginationInterceptor();
     sqlSessionFactoryBean.setPlugins(new Interceptor[]{paginationInterceptor});
 
@@ -148,6 +159,29 @@ public class LxMybatisAutoConfiguration extends BaseAutoConfiguration implements
     }
     register(configurableListableBeanFactory, sqlSessionTemplate, prefixName + "SessionTemplate",
         prefixName + "St");
+  }
+
+  private GlobalConfig getGlobalConfig() {
+    GlobalConfig globalConfig = GlobalConfigUtils.defaults();
+    globalConfig.setSqlInjector(new LogicSqlInjector());
+    GlobalConfig.DbConfig dbConfig = globalConfig.getDbConfig();
+    dbConfig.setIdType(IdType.ID_WORKER);
+    dbConfig.setDbType(DbType.MYSQL);
+    dbConfig.setTablePrefix("t_");
+    globalConfig.setDbConfig(dbConfig);
+    globalConfig.setMetaObjectHandler(new MetaObjectHandler() {
+      public void insertFill(MetaObject metaObject) {
+        Object createTime = metaObject.getValue("createTime");
+        if (null == createTime) {
+          this.setFieldValByName("createTime", System.currentTimeMillis(), metaObject);
+        }
+
+      }
+
+      public void updateFill(MetaObject metaObject) {
+      }
+    });
+    return globalConfig;
   }
 
   private void createBasePackageScanner(BeanDefinitionRegistry registry, String basePackage,

@@ -5,12 +5,32 @@ server:
     min-spare-threads: 30
   servlet:
     context-path: /
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+  #eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    health-check-url-path: /actuator/health
 lx:
   dataSource:
     write:
       username: root
       password: 123456
-      jdbcUrl: jdbc:mysql://127.0.0.1:3306/user?serverTimezone=UTC
+      jdbcUrl: jdbc:mysql://192.168.118.82:3306/user?serverTimezone=UTC
       jdbcPool:
         maximumPoolSize: 30
         driverClassName: com.mysql.jdbc.Driver
@@ -25,5 +45,13 @@ lx:
     springmvc:
       cors:
         allow-headers: '*'
+  feign:
+    retry:
+      max-attempts: 0
+      max-period: 1000
+      period: 100
 
-
+spring:
+  redis:
+    host: 192.168.119.19
+    port: 16379

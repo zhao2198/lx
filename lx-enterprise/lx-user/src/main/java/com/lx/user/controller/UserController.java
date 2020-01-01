@@ -10,6 +10,7 @@ import com.lx.user.service.UserService;
 import com.lx.user.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.integration.redis.util.RedisLockRegistry;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Value("${spring.profiles.active}")
+    private String profile;
+
     @Autowired
     private RedisLockRegistry redisLockRegistry;
 
@@ -50,6 +54,24 @@ public class UserController {
         User user = userQueryDTO.toObject(User.class);
         List<UserVO> voList = userService.getUserList(user);
         return new ApiResponse().ok(voList);
+    }
+
+    @GetMapping("/profile")
+    ResponseEntity profile() {
+
+        return new ApiResponse().ok(profile);
+    }
+
+    @GetMapping("/profile2")
+    ResponseEntity profile2() {
+
+        return new ApiResponse().ok(profile);
+    }
+
+    @GetMapping("/profile3")
+    ResponseEntity profile3() {
+
+        return new ApiResponse().ok(profile);
     }
 
 

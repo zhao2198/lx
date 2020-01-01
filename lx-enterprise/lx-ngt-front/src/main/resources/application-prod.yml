@@ -1,0 +1,18 @@
+server:
+  port: 9003
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 30
+  servlet:
+    context-path: /back
+logging:
+  config: classpath:logback-spring.xml
+  file: /data0/log/back/back.log
+lx:
+  api:
+    url:
+      sso: http://sso.380ui.com/
+      ngt: http://hxngt.380ui.com/ngt/
+      file: http://file.380ui.com/upload
+      center: http://hxsale.380ui.com/
+      socket: ws://106.15.197.138:8081/broker/websocket/
